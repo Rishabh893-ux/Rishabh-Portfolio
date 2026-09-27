@@ -54,8 +54,8 @@ Built with Next.js 14, TypeScript, Tailwind CSS and Framer Motion.
 Requires **Node.js 18.17+**.
 
 ```bash
-git clone https://github.com/Rishabh893-ux/<this-repo>.git
-cd <this-repo>
+git clone https://github.com/Rishabh893-ux/Rishabh-Portfolio.git
+cd Rishabh-Portfolio
 npm install
 npm run dev
 ```
