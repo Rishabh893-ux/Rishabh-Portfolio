@@ -18,6 +18,9 @@ export type Project = {
   demo?: string;
   image?: string; // screenshot under /public
   video?: string; // short muted preview under /public, played on hover
+  // Tailwind aspect class for the card frame when the screenshot isn't 16:10
+  // (written out in full so Tailwind can see it), e.g. "aspect-[1280/580]".
+  imageAspect?: string;
   featured: boolean;
   status?: "In Development" | "Hackathon Submission";
 };
@@ -218,8 +221,9 @@ export const projects: Project[] = [
     futureImprovements: ["Add automated tests and CI across vendor and payout flows"],
     github: "https://github.com/Rishabh893-ux/Bazaario-ECommerce-Platform",
     demo: "https://vendly-dun.vercel.app",
-    image: "/projects/vendly-v2.jpg",
-    video: "/projects/previews/vendly-v2.mp4",
+    image: "/projects/vendly-v3.jpg",
+    video: "/projects/previews/vendly-v3.mp4",
+    imageAspect: "aspect-[1280/580]",
     featured: true,
   },
   {
