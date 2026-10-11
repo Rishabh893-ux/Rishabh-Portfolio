@@ -5,7 +5,6 @@ import { site } from "@/data/site";
 import { siteUrl } from "@/lib/siteUrl";
 import { Analytics } from "@vercel/analytics/next";
 import CommandPalette from "@/components/CommandPalette";
-import BackToTop from "@/components/BackToTop";
 import { themeInitScript } from "@/lib/theme";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -80,7 +79,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         {children}
-        <BackToTop />
         <CommandPalette />
         <Analytics />
       </body>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import PreviewVideo from "./PreviewVideo";
 
 export default function Screenshot({
   src,
@@ -10,6 +11,8 @@ export default function Screenshot({
   priority = false,
   natural = false,
   zoomOnHover = false,
+  video,
+  playing = false,
 }: {
   src: string;
   alt: string;
@@ -22,6 +25,9 @@ export default function Screenshot({
   natural?: boolean;
   /** Zoom the image slightly when a parent with the `group` class is hovered. */
   zoomOnHover?: boolean;
+  /** Optional muted preview video shown over the screenshot while `playing`. */
+  video?: string;
+  playing?: boolean;
 }) {
   const zoom = zoomOnHover ? " transition-transform duration-700 ease-out group-hover:scale-[1.06]" : "";
   const host = url?.replace(/^https?:\/\//, "").replace(/\/$/, "");
@@ -38,6 +44,7 @@ export default function Screenshot({
       ) : (
         <div className={`relative w-full ${imageClassName}`}>
           <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={`object-cover object-left-top${zoom}`} />
+          {video && <PreviewVideo src={video} poster={src} playing={playing} />}
         </div>
       )}
     </div>
