@@ -21,14 +21,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 24);
-      const doc = document.documentElement;
-      const max = doc.scrollHeight - doc.clientHeight;
-      setProgress(max > 0 ? Math.min(window.scrollY / max, 1) : 0);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -62,15 +58,6 @@ export default function Navbar() {
           scrolled ? "py-2" : "py-4"
         )}
       >
-        <div
-          role="progressbar"
-          aria-label="Reading progress"
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-valuenow={Math.round(progress * 100)}
-          className="pointer-events-none absolute left-0 top-0 h-[3px] rounded-r-full bg-gradient-to-r from-accent-dim via-accent to-accent-bright shadow-[0_0_12px_rgba(108,92,231,0.7)] transition-[width] duration-150"
-          style={{ width: `${progress * 100}%` }}
-        />
         <div className="section-container">
           <div
             className={cn(
