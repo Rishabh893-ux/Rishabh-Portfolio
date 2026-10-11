@@ -10,6 +10,30 @@ import { categoricalColor } from "@/lib/chartColors";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import { spotlightMove } from "@/lib/utils";
+import { techIcon } from "@/lib/techIcons";
+import type { CSSProperties } from "react";
+
+/** Short label for a tile; the full name stays in the accessible label and dialog. */
+const shortName = (name: string) => name.replace(/\s*\(.*\)$/, "");
+
+function SkillLogo({ name }: { name: string }) {
+  const icon = techIcon(name);
+  if (icon.kind === "brand") {
+    return (
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="skill-logo h-7 w-7 text-secondary transition-colors duration-300">
+        <path d={icon.path} />
+      </svg>
+    );
+  }
+  const { Icon } = icon;
+  return <Icon aria-hidden="true" strokeWidth={1.6} className="skill-logo h-7 w-7 text-secondary transition-colors duration-300" />;
+}
+
+function brandVars(name: string): CSSProperties {
+  const icon = techIcon(name);
+  if (icon.kind !== "brand") return {};
+  return { "--brand-d": icon.dark, "--brand-l": icon.light } as CSSProperties;
+}
 
 const maxCount = Math.max(...skillCategories.map((c) => c.skills.length));
 
@@ -94,20 +118,24 @@ export default function Skills() {
                     whileInView="show"
                     viewport={{ once: true, margin: "-40px" }}
                     variants={pillContainer}
-                    className="flex flex-wrap gap-2"
+                    className="grid grid-cols-[repeat(auto-fill,minmax(5.25rem,1fr))] gap-2"
                   >
                     {cat.skills.map((skill) => (
                       <motion.button
                         key={skill.name}
                         variants={pillItem}
-                        whileHover={{ scale: 1.06, y: -1 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ y: -3 }}
+                        whileTap={{ scale: 0.96 }}
                         onClick={() => setActive(skill)}
-                        className="rounded-lg border border-border bg-surface/50 px-3 py-1.5 text-sm text-secondary transition-colors hover:text-primary focus-ring"
-                        onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${color}66`)}
-                        onMouseLeave={(e) => (e.currentTarget.style.borderColor = "")}
+                        aria-label={`${skill.name}: see where it's used`}
+                        title={skill.name}
+                        style={brandVars(skill.name)}
+                        className="skill-tile group relative flex flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border border-border bg-surface/50 px-2 py-3 text-center transition-colors duration-300 hover:border-white/20 focus-ring"
                       >
-                        {skill.name}
+                        <SkillLogo name={skill.name} />
+                        <span className="line-clamp-2 text-[11px] leading-tight text-secondary transition-colors group-hover:text-primary">
+                          {shortName(skill.name)}
+                        </span>
                       </motion.button>
                     ))}
                   </motion.div>
