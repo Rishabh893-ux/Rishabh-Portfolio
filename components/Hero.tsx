@@ -9,6 +9,7 @@ import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
 import Terminal from "./Terminal";
 import HeroNetwork from "./HeroNetwork";
+import Avatar from "./Avatar";
 import CountUp from "./CountUp";
 import Magnetic from "./Magnetic";
 import { spotlightMove } from "@/lib/utils";
@@ -80,6 +81,11 @@ export default function Hero() {
 
       <div className="section-container relative grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-14">
         <div className="min-w-0">
+          {/* Phones: the photo sits above the badge, since it won't fit beside the name. */}
+          <motion.div custom={0} initial="hidden" animate="show" variants={fadeUp} className="mb-6 sm:hidden">
+            <Avatar width={96} height={118} priority />
+          </motion.div>
+
           <motion.div
             custom={0}
             initial="hidden"
@@ -94,16 +100,22 @@ export default function Hero() {
             Open to SDE &amp; Full Stack roles
           </motion.div>
 
-          <motion.h1
-            custom={1}
-            initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            className="mt-6 font-display text-5xl font-semibold leading-[0.95] tracking-tight text-primary sm:text-6xl lg:text-7xl"
-          >
-            <span className="block">Rishabh</span>
-            <span className="block gradient-text-static pb-1">Kasaudhan</span>
-          </motion.h1>
+          <div className="mt-6 flex items-center gap-6 lg:gap-8">
+            <motion.h1
+              custom={1}
+              initial="hidden"
+              animate="show"
+              variants={fadeUp}
+              className="font-display text-5xl font-semibold leading-[0.95] tracking-tight text-primary sm:text-6xl lg:text-7xl"
+            >
+              <span className="block">Rishabh</span>
+              <span className="block gradient-text-static pb-1">Kasaudhan</span>
+            </motion.h1>
+            {/* Tablets and up: the photo sits beside the name. */}
+            <motion.div custom={1.5} initial="hidden" animate="show" variants={fadeUp} className="hidden sm:block">
+              <Avatar width={132} height={162} priority />
+            </motion.div>
+          </div>
 
           <motion.p
             custom={2}

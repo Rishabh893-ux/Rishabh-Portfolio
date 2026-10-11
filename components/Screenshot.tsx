@@ -6,7 +6,7 @@ export default function Screenshot({
   alt,
   url,
   className = "",
-  imageClassName = "aspect-[16/10]",
+  imageClassName: imageClassNameProp,
   sizes = "(min-width: 1024px) 320px, 100vw",
   priority = false,
   natural = false,
@@ -29,6 +29,7 @@ export default function Screenshot({
   video?: string;
   playing?: boolean;
 }) {
+  const imageClassName = imageClassNameProp ?? "aspect-[16/10]";
   const zoom = zoomOnHover ? " transition-transform duration-700 ease-out group-hover:scale-[1.06]" : "";
   const host = url?.replace(/^https?:\/\//, "").replace(/\/$/, "");
   return (
