@@ -42,7 +42,7 @@ function Connector({ delay }: { delay: number }) {
   return (
     <div className="relative mx-auto h-8 w-px bg-border" aria-hidden="true">
       <motion.span
-        className="absolute left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_8px_rgba(108,92,231,0.9)]"
+        className="absolute left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_8px_rgb(var(--c-accent)/0.9)]"
         initial={{ top: "0%", opacity: 0 }}
         animate={{ top: ["0%", "100%"], opacity: [0, 1, 0] }}
         transition={{ duration: 1.2, delay, repeat: Infinity, repeatDelay: 1.2, ease: "easeInOut" }}

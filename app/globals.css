@@ -14,6 +14,8 @@
   --c-ink: 255 255 255;
   --border-alpha: 0.08;
   --shadow-alpha: 0.35;
+  --c-accent: 108 92 231;
+  --c-accent-dim: 87 71 199;
   --c-accent-bright: 156 144 255;
   --c-accent2: 166 166 179;
   --c-accent2-dim: 117 117 127;
@@ -22,6 +24,12 @@
   --noise-opacity: 0.5;
   --scroll-thumb: 35 36 39;
   --scroll-thumb-hover: 47 48 51;
+  /* Button gradient (light → deep end) and its text color. */
+  --btn-from: 156 144 255;
+  --btn-to: 108 92 231;
+  /* Name highlight gradient. */
+  --name-from: 156 144 255;
+  --name-to: 108 92 231;
   /* Categorical chart colors (dataviz reference palette, dark column). */
   --series-1: #3987e5;
   --series-2: #d95926;
@@ -33,28 +41,36 @@
   --series-8: #e66767;
 }
 
-/* Light theme: same accent, inverted neutrals. Applied by the inline script in
-   app/layout.tsx before first paint, so there is no flash. */
+/* Light theme: warm ivory and beige with espresso text and an antique-gold
+   accent. Applied by the inline script in app/layout.tsx before first paint, so
+   there is no flash. Text colors clear WCAG AA (4.5:1) on the beige surfaces. */
 html.light {
   color-scheme: light;
-  --c-bg: 250 250 252;
-  --c-bg-end: 244 244 248;
-  --c-surface: 255 255 255;
-  --c-surface2: 243 243 247;
-  --c-primary: 17 17 22;
-  --c-secondary: 82 82 92;
-  --c-muted: 113 113 122;
-  --c-ink: 15 15 25;
-  --border-alpha: 0.1;
-  --shadow-alpha: 0.08;
-  --c-accent-bright: 87 71 199;
-  --c-accent2: 110 110 122;
-  --c-accent2-dim: 150 150 160;
-  --c-accent2-bright: 70 70 82;
-  --glass: 255 255 255;
-  --noise-opacity: 0.18;
-  --scroll-thumb: 205 205 212;
-  --scroll-thumb-hover: 180 180 190;
+  --c-bg: 246 241 231;
+  --c-bg-end: 239 231 216;
+  --c-surface: 252 249 243;
+  --c-surface2: 241 234 221;
+  --c-primary: 38 30 22;
+  --c-secondary: 105 91 75;
+  --c-muted: 123 109 91;
+  --c-ink: 74 54 28;
+  --border-alpha: 0.14;
+  --shadow-alpha: 0.1;
+  --c-accent: 132 98 31;
+  --c-accent-dim: 100 72 20;
+  --c-accent-bright: 122 90 31;
+  --c-accent2: 150 132 104;
+  --c-accent2-dim: 196 180 152;
+  --c-accent2-bright: 112 94 66;
+  --glass: 252 249 243;
+  --noise-opacity: 0.22;
+  --scroll-thumb: 214 200 176;
+  --scroll-thumb-hover: 190 172 142;
+  /* Espresso buttons with cream text; gold name highlight. */
+  --btn-from: 74 56 36;
+  --btn-to: 38 28 18;
+  --name-from: 176 138 64;
+  --name-to: 107 78 23;
   /* Light column of the same palette. */
   --series-1: #2a78d6;
   --series-2: #eb6834;
@@ -87,7 +103,7 @@ html {
 body {
   position: relative;
   background:
-    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(108, 92, 231, 0.12), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 15% 0%, rgb(var(--c-accent) / 0.12), transparent 55%),
     radial-gradient(ellipse 55% 45% at 85% 15%, rgb(var(--c-ink) / 0.04), transparent 55%),
     linear-gradient(180deg, rgb(var(--c-bg)) 0%, rgb(var(--c-bg-end)) 100%);
   color: rgb(var(--c-primary));
@@ -110,37 +126,36 @@ body > * {
 }
 
 ::selection {
-  background: rgba(108, 92, 231, 0.3);
+  background: rgb(var(--c-accent) / 0.3);
 }
 
 /* A refined monochrome-to-accent shimmer: white fading into the single accent hue,
    never a second competing color. */
 .gradient-text {
-  background: linear-gradient(115deg, rgb(var(--c-primary)) 0%, rgb(var(--c-accent2-bright)) 32%, rgb(var(--c-accent-bright)) 68%, #6c5ce7 100%);
+  background: linear-gradient(115deg, rgb(var(--c-primary)) 0%, rgb(var(--c-accent2-bright)) 32%, rgb(var(--c-accent-bright)) 68%, rgb(var(--c-accent)) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .gradient-text-static {
-  background: linear-gradient(115deg, rgb(var(--c-accent-bright)) 0%, #6c5ce7 100%);
+  background: linear-gradient(115deg, rgb(var(--name-from)) 0%, rgb(var(--name-to)) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .gradient-btn {
-  background: linear-gradient(115deg, #9c90ff 0%, #6c5ce7 100%);
+  background: linear-gradient(115deg, rgb(var(--btn-from)) 0%, rgb(var(--btn-to)) 100%);
   background-size: 160% 160%;
   transition: background-position 0.5s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 .gradient-btn:hover {
   background-position: 100% 50%;
 }
-/* On the light theme the button text is white, so use a deeper gradient that
-   keeps it readable (about 4.6:1 at the light end). */
+/* Light theme: a thin gold hairline makes the espresso buttons feel tailored. */
 html.light .gradient-btn {
-  background-image: linear-gradient(115deg, #6c5ce7 0%, #4c3cc0 100%);
+  box-shadow: inset 0 0 0 1px rgb(var(--name-from) / 0.55), 0 8px 24px -10px rgb(38 28 18 / 0.45);
 }
 
 .glass-card {
@@ -159,7 +174,7 @@ html.light .gradient-btn {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(108, 92, 231, 0.55), rgb(var(--c-ink) / 0.12));
+  background: linear-gradient(135deg, rgb(var(--c-accent) / 0.55), rgb(var(--c-ink) / 0.12));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -188,7 +203,7 @@ html.light .gradient-btn {
   inset: 0;
   z-index: 0;
   border-radius: inherit;
-  background: radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), rgba(108, 92, 231, 0.14), transparent 70%);
+  background: radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), rgb(var(--c-accent) / 0.14), transparent 70%);
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
