@@ -6,6 +6,7 @@ import { Menu, X, Command } from "lucide-react";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 import Magnetic from "./Magnetic";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { href: "#experience", label: "Experience" },
@@ -62,7 +63,12 @@ export default function Navbar() {
         )}
       >
         <div
-          className="pointer-events-none absolute left-0 top-0 h-[2px] bg-gradient-to-r from-accent to-accent2 transition-[width] duration-150"
+          role="progressbar"
+          aria-label="Reading progress"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(progress * 100)}
+          className="pointer-events-none absolute left-0 top-0 h-[3px] rounded-r-full bg-gradient-to-r from-accent-dim via-accent to-accent-bright shadow-[0_0_12px_rgba(108,92,231,0.7)] transition-[width] duration-150"
           style={{ width: `${progress * 100}%` }}
         />
         <div className="section-container">
@@ -102,6 +108,7 @@ export default function Navbar() {
             </nav>
 
             <div className="hidden md:flex items-center gap-2">
+              <ThemeToggle />
               <button
                 onClick={() => window.dispatchEvent(new CustomEvent("open-command-palette"))}
                 className="flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs text-secondary hover:text-primary hover:border-white/20 transition-colors focus-ring"
@@ -120,13 +127,16 @@ export default function Navbar() {
               </Magnetic>
             </div>
 
-            <button
-              className="md:hidden p-2 text-primary focus-ring rounded-lg"
-              onClick={() => setOpen(true)}
-              aria-label="Open menu"
-            >
-              <Menu size={22} />
-            </button>
+            <div className="flex items-center gap-1 md:hidden">
+              <ThemeToggle />
+              <button
+                className="p-2 text-primary focus-ring rounded-lg"
+                onClick={() => setOpen(true)}
+                aria-label="Open menu"
+              >
+                <Menu size={22} />
+              </button>
+            </div>
           </div>
         </div>
       </header>

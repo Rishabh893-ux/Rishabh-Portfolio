@@ -4,6 +4,66 @@
 
 :root {
   color-scheme: dark;
+  --c-bg: 8 8 10;
+  --c-bg-end: 11 11 14;
+  --c-surface: 15 15 18;
+  --c-surface2: 23 23 27;
+  --c-primary: 245 245 246;
+  --c-secondary: 150 150 158;
+  --c-muted: 107 107 114;
+  --c-ink: 255 255 255;
+  --border-alpha: 0.08;
+  --shadow-alpha: 0.35;
+  --c-accent-bright: 156 144 255;
+  --c-accent2: 166 166 179;
+  --c-accent2-dim: 117 117 127;
+  --c-accent2-bright: 227 227 232;
+  --glass: 17 16 21;
+  --noise-opacity: 0.5;
+  --scroll-thumb: 35 36 39;
+  --scroll-thumb-hover: 47 48 51;
+  /* Categorical chart colors (dataviz reference palette, dark column). */
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+}
+
+/* Light theme: same accent, inverted neutrals. Applied by the inline script in
+   app/layout.tsx before first paint, so there is no flash. */
+html.light {
+  color-scheme: light;
+  --c-bg: 250 250 252;
+  --c-bg-end: 244 244 248;
+  --c-surface: 255 255 255;
+  --c-surface2: 243 243 247;
+  --c-primary: 17 17 22;
+  --c-secondary: 82 82 92;
+  --c-muted: 113 113 122;
+  --c-ink: 15 15 25;
+  --border-alpha: 0.1;
+  --shadow-alpha: 0.08;
+  --c-accent-bright: 87 71 199;
+  --c-accent2: 110 110 122;
+  --c-accent2-dim: 150 150 160;
+  --c-accent2-bright: 70 70 82;
+  --glass: 255 255 255;
+  --noise-opacity: 0.18;
+  --scroll-thumb: 205 205 212;
+  --scroll-thumb-hover: 180 180 190;
+  /* Light column of the same palette. */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #6250d6;
+  --series-8: #e34948;
 }
 
 html {
@@ -28,9 +88,9 @@ body {
   position: relative;
   background:
     radial-gradient(ellipse 60% 40% at 15% 0%, rgba(108, 92, 231, 0.12), transparent 55%),
-    radial-gradient(ellipse 55% 45% at 85% 15%, rgba(255, 255, 255, 0.04), transparent 55%),
-    linear-gradient(180deg, #08080a 0%, #0b0b0e 100%);
-  color: #f5f5f6;
+    radial-gradient(ellipse 55% 45% at 85% 15%, rgb(var(--c-ink) / 0.04), transparent 55%),
+    linear-gradient(180deg, rgb(var(--c-bg)) 0%, rgb(var(--c-bg-end)) 100%);
+  color: rgb(var(--c-primary));
 }
 
 body::before {
@@ -39,7 +99,7 @@ body::before {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.5;
+  opacity: var(--noise-opacity);
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
 }
@@ -56,14 +116,14 @@ body > * {
 /* A refined monochrome-to-accent shimmer: white fading into the single accent hue,
    never a second competing color. */
 .gradient-text {
-  background: linear-gradient(115deg, #f5f5f6 0%, #e3e3e8 32%, #9c90ff 68%, #6c5ce7 100%);
+  background: linear-gradient(115deg, rgb(var(--c-primary)) 0%, rgb(var(--c-accent2-bright)) 32%, rgb(var(--c-accent-bright)) 68%, #6c5ce7 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .gradient-text-static {
-  background: linear-gradient(115deg, #9c90ff 0%, #6c5ce7 100%);
+  background: linear-gradient(115deg, rgb(var(--c-accent-bright)) 0%, #6c5ce7 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -77,11 +137,16 @@ body > * {
 .gradient-btn:hover {
   background-position: 100% 50%;
 }
+/* On the light theme the button text is white, so use a deeper gradient that
+   keeps it readable (about 4.6:1 at the light end). */
+html.light .gradient-btn {
+  background-image: linear-gradient(115deg, #6c5ce7 0%, #4c3cc0 100%);
+}
 
 .glass-card {
-  background: rgba(17, 16, 21, 0.7);
+  background: rgb(var(--glass) / 0.7);
   backdrop-filter: blur(12px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 18px 40px rgb(0 0 0 / calc(var(--shadow-alpha) * 0.5));
 }
 
 .gradient-border {
@@ -94,7 +159,7 @@ body > * {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(108, 92, 231, 0.55), rgba(255, 255, 255, 0.12));
+  background: linear-gradient(135deg, rgba(108, 92, 231, 0.55), rgb(var(--c-ink) / 0.12));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -142,19 +207,19 @@ body > * {
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #08090a;
+  background: rgb(var(--c-bg));
 }
 ::-webkit-scrollbar-thumb {
-  background: #232427;
+  background: rgb(var(--scroll-thumb));
   border-radius: 999px;
-  border: 2px solid #08090a;
+  border: 2px solid rgb(var(--c-bg));
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2f3033;
+  background: rgb(var(--scroll-thumb-hover));
 }
 
 .bg-dot-grid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-image: radial-gradient(rgb(var(--c-ink) / 0.06) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -172,4 +237,13 @@ body > * {
 
 .focus-ring {
   @apply outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg;
+}
+
+/* Smooth color change when the theme is toggled (skipped for reduced motion,
+   which the rule above already collapses to ~0ms). */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, fill 0.35s ease !important;
 }

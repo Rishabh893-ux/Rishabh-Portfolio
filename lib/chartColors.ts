@@ -12,6 +12,8 @@ export const CATEGORICAL_DARK = [
   "#e66767", // red
 ] as const;
 
+// Returns a CSS variable so the chart follows the active theme: globals.css
+// defines --series-N with the dark column above and the light column for html.light.
 export function categoricalColor(index: number) {
-  return CATEGORICAL_DARK[index % CATEGORICAL_DARK.length];
+  return `var(--series-${(index % CATEGORICAL_DARK.length) + 1})`;
 }
