@@ -262,3 +262,33 @@ html.theme-transition *::before,
 html.theme-transition *::after {
   transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, fill 0.35s ease !important;
 }
+
+/* Skill logo tiles: the logo takes its brand color on hover when that color is
+   readable on the theme's surface (--brand-d / --brand-l, set per tile), and a
+   soft glow of the same color rises behind it. */
+.skill-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle at 50% 35%, var(--glow, rgb(var(--c-accent))) 0%, transparent 70%);
+  pointer-events: none;
+}
+.skill-tile > * {
+  position: relative;
+}
+.skill-tile {
+  --glow: var(--brand-d, rgb(var(--c-accent)));
+}
+html.light .skill-tile {
+  --glow: var(--brand-l, rgb(var(--c-accent)));
+}
+.skill-tile:hover::before,
+.skill-tile:focus-visible::before {
+  opacity: 0.16;
+}
+.skill-tile:hover .skill-logo,
+.skill-tile:focus-visible .skill-logo {
+  color: var(--glow);
+}

@@ -50,7 +50,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <span className="rounded-full border border-border px-2.5 py-0.5 text-[11px] font-medium text-secondary">
               {project.category}
             </span>
-            <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-primary sm:text-4xl">{project.name}</h1>
+            <h1 className="mt-4 font-serif text-4xl font-normal leading-[1.05] tracking-tight text-primary sm:text-6xl">{project.name}</h1>
             <p className="mt-3 max-w-2xl text-secondary leading-relaxed">{project.description}</p>
 
             <div className="mt-5 flex flex-wrap gap-1.5">

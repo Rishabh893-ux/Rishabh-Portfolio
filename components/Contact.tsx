@@ -73,7 +73,7 @@ export default function Contact() {
                 <span className="h-px w-4 bg-gradient-to-r from-accent to-accent2" />
                 07 / Contact
               </span>
-              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-primary sm:text-4xl">
+              <h2 className="mt-3 font-serif text-4xl font-normal leading-[1.05] tracking-tight text-primary sm:text-5xl">
                 Let&apos;s build something meaningful.
               </h2>
               <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-bg/50 px-3 py-1.5 text-xs text-secondary">
