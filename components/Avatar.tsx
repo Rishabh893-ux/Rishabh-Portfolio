@@ -13,7 +13,7 @@ const initials = site.name
  * Until `site.photo` is set, it shows the initials instead, so the layout never
  * has an empty hole.
  */
-export default function Avatar({ width = 88, height = 108 }: { width?: number; height?: number }) {
+export default function Avatar({ width = 104, height = 128 }: { width?: number; height?: number }) {
   return (
     <div className="relative shrink-0" style={{ width, height }}>
       <div aria-hidden="true" className="absolute -inset-2 rounded-3xl bg-accent/20 blur-xl" />
