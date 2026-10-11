@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Inter, Instrument_Serif, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
 import { siteUrl } from "@/lib/siteUrl";
 import { Analytics } from "@vercel/analytics/next";
 import CommandPalette from "@/components/CommandPalette";
+import CursorGlow from "@/components/CursorGlow";
 import { themeInitScript } from "@/lib/theme";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -14,6 +15,15 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
   display: "swap",
   weight: ["500", "600", "700"],
+});
+
+// Editorial serif for the large headings.
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
 const title = `${site.name} — Full Stack Developer | Next.js · Node.js · MongoDB`;
@@ -65,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jbmono.variable} ${spaceGrotesk.variable}`}
+      className={`${inter.variable} ${jbmono.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -79,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         {children}
+        <CursorGlow />
         <CommandPalette />
         <Analytics />
       </body>
