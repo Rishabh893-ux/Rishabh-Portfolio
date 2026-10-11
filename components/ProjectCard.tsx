@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { MouseEvent } from "react";
+import { useState, type MouseEvent } from "react";
 import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { ArrowUpRight, Github, ExternalLink, Sparkles } from "lucide-react";
 import type { Project } from "@/data/projects";
@@ -29,6 +29,7 @@ export default function ProjectCard({
   spotlight?: boolean;
 }) {
   const reduceMotion = useReducedMotion();
+  const [previewing, setPreviewing] = useState(false);
   const tiltX = useMotionValue(0);
   const tiltY = useMotionValue(0);
   const rotateX = useSpring(tiltX, { stiffness: 160, damping: 18 });
@@ -45,9 +46,15 @@ export default function ProjectCard({
     tiltX.set(-py * MAX_TILT * 2);
   }
 
+  function onEnter() {
+    // Preview videos play on hover with a real mouse only (not on touch, not for reduced motion).
+    if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) setPreviewing(true);
+  }
+
   function onLeave() {
     tiltX.set(0);
     tiltY.set(0);
+    setPreviewing(false);
   }
 
   return (
@@ -57,6 +64,7 @@ export default function ProjectCard({
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, delay: (index % 2) * 0.08, ease: "easeOut" }}
       onMouseMove={onMove}
+      onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       style={{ rotateX, rotateY, transformPerspective: 1100 }}
       className={`group spotlight relative overflow-hidden rounded-2xl border bg-surface/60 p-6 transition-[background-color,border-color,box-shadow] duration-300 will-change-transform hover:bg-surface2/60 hover:shadow-lift sm:p-8 ${
@@ -142,7 +150,9 @@ export default function ProjectCard({
               alt={`${project.name} screenshot`}
               url={project.demo !== "#" ? project.demo : undefined}
               className="shadow-soft transition-shadow duration-500 group-hover:shadow-lift"
-              zoomOnHover
+              zoomOnHover={!project.video}
+              video={project.video}
+              playing={previewing}
             />
           </Link>
         ) : (
