@@ -37,14 +37,14 @@ export default function ProjectCard({
       }`}
     >
       <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      {spotlight && (
-        <span className="absolute right-6 top-6 inline-flex items-center gap-1.5 rounded-full border border-accent2/30 bg-accent2/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.1em] text-accent2-bright">
-          <Sparkles size={11} /> Featured
-        </span>
-      )}
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div className="flex-1">
-          <div className="mb-3 flex items-center gap-2">
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            {spotlight && (
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-accent2/30 bg-accent2/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.1em] text-accent2-bright">
+                <Sparkles size={11} /> Featured
+              </span>
+            )}
             <span className="rounded-full border border-border px-2.5 py-0.5 text-[11px] font-medium text-secondary">
               {project.category}
             </span>
