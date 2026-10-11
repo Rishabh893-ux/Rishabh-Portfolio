@@ -75,7 +75,7 @@ Both are optional. Copy `.env.example` to `.env.local` for local development.
 
 | Variable | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_FORMSPREE_ID` | Formspree form ID (the part after `/f/`). Without it, the contact form opens the visitor's email app. |
+| `NEXT_PUBLIC_FORMSPREE_ID` | Formspree form ID (the part after `/f/`). Defaults to this site's own form; set it to use another form, or to an empty value to make the contact form open the visitor's email app instead. |
 | `NEXT_PUBLIC_SITE_URL` | Public URL used for metadata, the sitemap and `robots.txt`. On Vercel it's detected automatically, so set this only for a custom domain. |
 
 ## Editing content
@@ -117,7 +117,7 @@ The site is designed for [Vercel](https://vercel.com):
 
 1. Push this repository to GitHub.
 2. Import it at [vercel.com/new](https://vercel.com/new). The defaults for Next.js work as-is.
-3. Optionally add `NEXT_PUBLIC_FORMSPREE_ID` under **Settings → Environment Variables**.
+3. The contact form already sends through Formspree, so no environment variables are needed.
 4. To use a custom domain, add it under **Settings → Domains** and set `NEXT_PUBLIC_SITE_URL` to it.
 
 Every push to `main` then deploys automatically.
