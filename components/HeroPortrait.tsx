@@ -30,7 +30,7 @@ export default function HeroPortrait({ stats }: { stats: Stat[] }) {
         {/* Oversized conic layer spinning behind the photo; only its edge shows. */}
         <div
           aria-hidden="true"
-          className="absolute -inset-1/2 animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_0deg,#6C5CE7,rgb(var(--c-accent2-bright)),#9C90FF,#6C5CE7)]"
+          className="absolute -inset-1/2 animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_0deg,rgb(var(--c-accent)),rgb(var(--c-accent2-bright)),rgb(var(--name-from)),rgb(var(--c-accent)))]"
         />
         <div className="relative h-full w-full overflow-hidden rounded-[calc(2rem-3px)] bg-surface">
           <Image

@@ -12,7 +12,7 @@ function readColors() {
   const css = getComputedStyle(document.documentElement);
   const light = document.documentElement.classList.contains("light");
   return {
-    accent: "108 92 231",
+    accent: css.getPropertyValue("--c-accent").trim() || "108 92 231",
     ink: css.getPropertyValue("--c-ink").trim() || "255 255 255",
     lineAlpha: light ? 0.22 : 0.16,
     nodeAlpha: light ? 0.55 : 0.6,
