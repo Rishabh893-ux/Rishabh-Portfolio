@@ -9,10 +9,8 @@ import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
 import Terminal from "./Terminal";
 import HeroNetwork from "./HeroNetwork";
-import Avatar from "./Avatar";
-import CountUp from "./CountUp";
+import HeroPortrait from "./HeroPortrait";
 import Magnetic from "./Magnetic";
-import { spotlightMove } from "@/lib/utils";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -79,13 +77,8 @@ export default function Hero() {
       <div className="glow-orb -left-24 top-10 h-72 w-72 bg-accent/20 animate-float" />
       <div className="glow-orb -right-16 top-40 h-80 w-80 bg-accent2/20 animate-float-slow" />
 
-      <div className="section-container relative grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-14">
+      <div className="section-container relative grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-14">
         <div className="min-w-0">
-          {/* Phones: the photo sits above the badge, since it won't fit beside the name. */}
-          <motion.div custom={0} initial="hidden" animate="show" variants={fadeUp} className="mb-6 sm:hidden">
-            <Avatar width={96} height={118} priority />
-          </motion.div>
-
           <motion.div
             custom={0}
             initial="hidden"
@@ -100,22 +93,16 @@ export default function Hero() {
             Open to SDE &amp; Full Stack roles
           </motion.div>
 
-          <div className="mt-6 flex items-center gap-6 lg:gap-8">
-            <motion.h1
-              custom={1}
-              initial="hidden"
-              animate="show"
-              variants={fadeUp}
-              className="font-display text-5xl font-semibold leading-[0.95] tracking-tight text-primary sm:text-6xl lg:text-7xl"
-            >
-              <span className="block">Rishabh</span>
-              <span className="block gradient-text-static pb-1">Kasaudhan</span>
-            </motion.h1>
-            {/* Tablets and up: the photo sits beside the name. */}
-            <motion.div custom={1.5} initial="hidden" animate="show" variants={fadeUp} className="hidden sm:block">
-              <Avatar width={132} height={162} priority />
-            </motion.div>
-          </div>
+          <motion.h1
+            custom={1}
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
+            className="mt-6 font-display text-5xl font-semibold leading-[0.95] tracking-tight text-primary sm:text-6xl lg:text-7xl"
+          >
+            <span className="block">Rishabh</span>
+            <span className="block gradient-text-static pb-1">Kasaudhan</span>
+          </motion.h1>
 
           <motion.p
             custom={2}
@@ -200,27 +187,24 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
-          className="min-w-0 lg:pt-14"
+          transition={{ delay: 0.25, duration: 0.6, ease: "easeOut" }}
+          className="min-w-0 px-6 sm:px-10"
         >
-          <Terminal />
-
-          <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                onMouseMove={spotlightMove}
-                className="gradient-border spotlight rounded-2xl border border-border bg-surface/50 p-3 sm:p-4"
-              >
-                <div className="font-display text-2xl font-semibold text-primary">
-                  <CountUp value={stat.value} />
-                </div>
-                <div className="mt-1 text-[11px] leading-tight text-secondary sm:text-xs">{stat.label}</div>
-              </div>
-            ))}
-          </div>
+          <HeroPortrait stats={stats} />
         </motion.div>
       </div>
+
+      {/* The interactive terminal now sits in its own row under the hero. */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.45, duration: 0.6, ease: "easeOut" }}
+        className="section-container relative mt-16 sm:mt-20"
+      >
+        <div className="mx-auto max-w-3xl">
+          <Terminal />
+        </div>
+      </motion.div>
 
       <motion.a
         href="#experience"
