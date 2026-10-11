@@ -67,6 +67,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run dev` | Start the dev server with hot reload |
 | `npm run build` | Create a production build |
 | `npm run start` | Serve the production build |
+| `npm run lint` | Check the code with ESLint (Next.js rules) |
 
 ## Environment variables
 
