@@ -15,6 +15,7 @@ import {
   Sun,
 } from "lucide-react";
 import { site } from "@/data/site";
+import { toggleTheme } from "@/lib/theme";
 
 type Cmd = {
   id: string;
@@ -51,9 +52,12 @@ export default function CommandPalette() {
       { id: "contact", label: "Contact Rishabh", icon: <Mail size={15} />, action: () => goTo("contact"), group: "Links" },
       {
         id: "toggle-theme",
-        label: "Toggle Theme (dark-first — light mode coming soon)",
+        label: "Toggle Light / Dark Theme",
         icon: <Sun size={15} />,
-        action: () => document.documentElement.classList.toggle("light-preview"),
+        action: () => {
+          toggleTheme();
+          setOpen(false);
+        },
         group: "Preferences",
       },
     ],
