@@ -17,6 +17,7 @@ export type Project = {
   github?: string;
   demo?: string;
   image?: string; // screenshot under /public
+  video?: string; // short muted preview under /public, played on hover
   featured: boolean;
   status?: "In Development" | "Hackathon Submission";
 };
@@ -77,6 +78,7 @@ export const projects: Project[] = [
     github: "https://github.com/Rishabh893-ux/AI-Navigator-",
     demo: "https://ai-navigator-five-nu.vercel.app",
     image: "/projects/ai-navigator.jpg",
+    video: "/projects/previews/ai-navigator.mp4",
     featured: true,
   },
   {
@@ -131,6 +133,7 @@ export const projects: Project[] = [
     github: "https://github.com/Rishabh893-ux/CareerOS-AI",
     demo: "https://career-os-ai-ten.vercel.app",
     image: "/projects/careeros-ai.jpg",
+    video: "/projects/previews/careeros-ai.mp4",
     featured: true,
   },
   {
@@ -216,6 +219,7 @@ export const projects: Project[] = [
     github: "https://github.com/Rishabh893-ux/Bazaario-ECommerce-Platform",
     demo: "https://vendly-dun.vercel.app",
     image: "/projects/vendly.jpg",
+    video: "/projects/previews/vendly.mp4",
     featured: true,
   },
   {
@@ -259,6 +263,7 @@ export const projects: Project[] = [
     github: "https://github.com/Rishabh893-ux/AI-ATS-RESUME-PLATFOORM",
     demo: "https://ai-ats-resume-platfoorm.vercel.app",
     image: "/projects/ai-ats-resume.jpg",
+    video: "/projects/previews/ai-ats-resume.mp4",
     featured: true,
   },
   {
