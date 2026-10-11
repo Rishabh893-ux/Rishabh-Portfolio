@@ -24,8 +24,9 @@ function FloatingField({
   );
 }
 
-// Create a free form at formspree.io and set NEXT_PUBLIC_FORMSPREE_ID; without it the form falls back to mailto.
-const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+// Formspree form IDs are public (they end up in the page either way), so the site's own form is the default.
+// Set NEXT_PUBLIC_FORMSPREE_ID to use a different form, or to an empty string to fall back to mailto.
+const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "mnpjzorl";
 
 type Status = "idle" | "sending" | "sent" | "mailto" | "error";
 
