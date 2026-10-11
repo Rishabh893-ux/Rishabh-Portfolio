@@ -218,8 +218,8 @@ export const projects: Project[] = [
     futureImprovements: ["Add automated tests and CI across vendor and payout flows"],
     github: "https://github.com/Rishabh893-ux/Bazaario-ECommerce-Platform",
     demo: "https://vendly-dun.vercel.app",
-    image: "/projects/vendly.jpg",
-    video: "/projects/previews/vendly.mp4",
+    image: "/projects/vendly-v2.jpg",
+    video: "/projects/previews/vendly-v2.mp4",
     featured: true,
   },
   {

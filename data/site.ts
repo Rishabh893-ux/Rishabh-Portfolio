@@ -8,7 +8,7 @@ export const site = {
   email: "rkasaudhan87@gmail.com",
   resumeUrl: "/resume.pdf",
   // Profile photo under /public (e.g. "/profile.jpg"). Leave empty to show initials.
-  photo: "",
+  photo: "/profile.jpg",
   location: "Lucknow, India",
   education: {
     degree: "B.Tech — Computer Science & Engineering",
