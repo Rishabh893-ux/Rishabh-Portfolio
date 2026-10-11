@@ -13,8 +13,7 @@ Built with Next.js 14, TypeScript, Tailwind CSS and Framer Motion.
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-0055FF?logo=framer&logoColor=white)](https://www.framer.com/motion/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-6C5CE7.svg)](LICENSE)
 
-<!-- Replace with your deployed URL once it's live -->
-**[Live site](#) · [Resume](public/resume.pdf) · [LinkedIn](https://www.linkedin.com/in/rishabh-kasaudhan-0a960724a/) · [GitHub](https://github.com/Rishabh893-ux)**
+**[Live site](https://rishabh-kasaudhan.vercel.app) · [Resume](public/resume.pdf) · [LinkedIn](https://www.linkedin.com/in/rishabh-kasaudhan-0a960724a/) · [GitHub](https://github.com/Rishabh893-ux)**
 
 <br />
 
