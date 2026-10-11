@@ -37,6 +37,7 @@ const config: Config = {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         display: ["var(--font-space)", "var(--font-inter)", "system-ui", "sans-serif"],
         mono: ["var(--font-jbmono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        serif: ["var(--font-serif)", "Georgia", "Times New Roman", "serif"],
       },
       boxShadow: {
         soft: "0 8px 30px rgb(0 0 0 / var(--shadow-alpha))",

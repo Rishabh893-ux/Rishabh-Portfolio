@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight, ChevronDown, Github, Linkedin, Mail } from "lucide-react";
 import { site } from "@/data/site";
 import { certifications } from "@/data/certifications";
@@ -71,6 +71,11 @@ const stats = [
 ];
 
 export default function Hero() {
+  const reduce = useReducedMotion();
+  // Gentle parallax: the photo drifts up a little slower than the page scrolls.
+  const { scrollY } = useScroll();
+  const portraitY = useTransform(scrollY, [0, 700], [0, reduce ? 0 : -70]);
+
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-24">
       <HeroNetwork />
@@ -93,16 +98,35 @@ export default function Hero() {
             Open to SDE &amp; Full Stack roles
           </motion.div>
 
-          <motion.h1
-            custom={1}
-            initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            className="mt-6 font-display text-5xl font-semibold leading-[0.95] tracking-tight text-primary sm:text-6xl lg:text-7xl"
+          <h1
+            aria-label={site.name}
+            className="mt-6 font-serif text-6xl font-normal leading-[0.92] tracking-tight text-primary sm:text-7xl lg:text-[5.5rem]"
           >
-            <span className="block">Rishabh</span>
-            <span className="block gradient-text-static pb-1">Kasaudhan</span>
-          </motion.h1>
+            {/* First name: letter by letter. */}
+            <span aria-hidden="true" className="block">
+              {"Rishabh".split("").map((ch, k) => (
+                <motion.span
+                  key={k}
+                  className="inline-block"
+                  initial={reduce ? false : { opacity: 0, y: "0.4em", rotate: 4 }}
+                  animate={{ opacity: 1, y: 0, rotate: 0 }}
+                  transition={{ delay: 0.15 + k * 0.05, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {ch}
+                </motion.span>
+              ))}
+            </span>
+            {/* Surname: the gradient word is wiped in from the left, like ink. */}
+            <motion.span
+              aria-hidden="true"
+              className="block pb-2 pr-2 italic gradient-text-static"
+              initial={reduce ? false : { clipPath: "inset(0 100% 0 0)" }}
+              animate={{ clipPath: "inset(0 0% 0 0)" }}
+              transition={{ delay: 0.55, duration: 1.1, ease: [0.65, 0, 0.35, 1] }}
+            >
+              Kasaudhan
+            </motion.span>
+          </h1>
 
           <motion.p
             custom={2}
@@ -190,7 +214,9 @@ export default function Hero() {
           transition={{ delay: 0.25, duration: 0.6, ease: "easeOut" }}
           className="min-w-0 px-6 sm:px-10"
         >
-          <HeroPortrait stats={stats} />
+          <motion.div style={{ y: portraitY }}>
+            <HeroPortrait stats={stats} />
+          </motion.div>
         </motion.div>
       </div>
 
