@@ -18,10 +18,11 @@ const config: Config = {
         // "white" overlays (bg-white/5, border-white/20…) follow the theme's ink:
         // white on dark, near-black on light.
         white: "rgb(var(--c-ink) / <alpha-value>)",
-        // Single vivid accent — the only hue in the UI.
+        // Single accent — the only hue in the UI: violet in dark mode, antique gold
+        // in the beige light theme (values in globals.css).
         accent: {
-          DEFAULT: "#6C5CE7",
-          dim: "#5747C7",
+          DEFAULT: "rgb(var(--c-accent) / <alpha-value>)",
+          dim: "rgb(var(--c-accent-dim) / <alpha-value>)",
           bright: "rgb(var(--c-accent-bright) / <alpha-value>)",
         },
         // Repurposed as a neutral silver "sheen" — never a second hue, only ever
@@ -39,7 +40,7 @@ const config: Config = {
       },
       boxShadow: {
         soft: "0 8px 30px rgb(0 0 0 / var(--shadow-alpha))",
-        glow: "0 0 0 1px rgba(108,92,231,0.18), 0 8px 30px rgba(108,92,231,0.10)",
+        glow: "0 0 0 1px rgb(var(--c-accent) / 0.18), 0 8px 30px rgb(var(--c-accent) / 0.10)",
         glow2: "0 0 0 1px rgb(var(--c-ink) / 0.10), 0 8px 30px rgb(var(--c-ink) / 0.05)",
         lift: "0 24px 60px -20px rgb(0 0 0 / calc(var(--shadow-alpha) * 1.7))",
       },
