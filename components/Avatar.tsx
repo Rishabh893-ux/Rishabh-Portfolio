@@ -13,7 +13,16 @@ const initials = site.name
  * Until `site.photo` is set, it shows the initials instead, so the layout never
  * has an empty hole.
  */
-export default function Avatar({ width = 104, height = 128 }: { width?: number; height?: number }) {
+export default function Avatar({
+  width = 104,
+  height = 128,
+  priority = false,
+}: {
+  width?: number;
+  height?: number;
+  /** Load immediately (for an above-the-fold photo such as the hero). */
+  priority?: boolean;
+}) {
   return (
     <div className="relative shrink-0" style={{ width, height }}>
       <div aria-hidden="true" className="absolute -inset-2 rounded-3xl bg-accent/20 blur-xl" />
@@ -30,6 +39,7 @@ export default function Avatar({ width = 104, height = 128 }: { width?: number; 
               alt={`Photo of ${site.name}`}
               fill
               sizes={`${width * 2}px`}
+              priority={priority}
               className="object-cover object-top"
             />
           ) : (
