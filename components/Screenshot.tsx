@@ -9,6 +9,7 @@ export default function Screenshot({
   sizes = "(min-width: 1024px) 320px, 100vw",
   priority = false,
   natural = false,
+  zoomOnHover = false,
 }: {
   src: string;
   alt: string;
@@ -19,7 +20,10 @@ export default function Screenshot({
   priority?: boolean;
   /** Show the whole image at its own aspect ratio instead of cropping to a frame. */
   natural?: boolean;
+  /** Zoom the image slightly when a parent with the `group` class is hovered. */
+  zoomOnHover?: boolean;
 }) {
+  const zoom = zoomOnHover ? " transition-transform duration-700 ease-out group-hover:scale-[1.06]" : "";
   const host = url?.replace(/^https?:\/\//, "").replace(/\/$/, "");
   return (
     <div className={`overflow-hidden rounded-xl border border-border bg-bg/60 ${className}`}>
@@ -30,10 +34,10 @@ export default function Screenshot({
         {host && <span className="ml-1.5 truncate font-mono text-[10px] text-secondary/70">{host}</span>}
       </div>
       {natural ? (
-        <Image src={src} alt={alt} width={0} height={0} sizes={sizes} priority={priority} className="h-auto w-full" />
+        <Image src={src} alt={alt} width={0} height={0} sizes={sizes} priority={priority} className={`h-auto w-full${zoom}`} />
       ) : (
         <div className={`relative w-full ${imageClassName}`}>
-          <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover object-left-top" />
+          <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={`object-cover object-left-top${zoom}`} />
         </div>
       )}
     </div>

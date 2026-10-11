@@ -5,6 +5,8 @@ import { site } from "@/data/site";
 import { siteUrl } from "@/lib/siteUrl";
 import { Analytics } from "@vercel/analytics/next";
 import CommandPalette from "@/components/CommandPalette";
+import BackToTop from "@/components/BackToTop";
+import { themeInitScript } from "@/lib/theme";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const jbmono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jbmono", display: "swap" });
@@ -67,6 +69,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${jbmono.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="bg-bg text-primary font-sans antialiased selection:bg-accent/30 selection:text-primary">
         <a
           href="#main-content"
@@ -75,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         {children}
+        <BackToTop />
         <CommandPalette />
         <Analytics />
       </body>

@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import type { MouseEvent } from "react";
+import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { ArrowUpRight, Github, ExternalLink, Sparkles } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { spotlightMove } from "@/lib/utils";
@@ -11,6 +12,8 @@ const archContainer = {
   hidden: {},
   show: { transition: { staggerChildren: 0.08 } },
 };
+const MAX_TILT = 5; // degrees at the card's edge
+
 const archLine = {
   hidden: { opacity: 0, x: -6 },
   show: { opacity: 1, x: 0, transition: { duration: 0.3, ease: "easeOut" } },
@@ -25,14 +28,38 @@ export default function ProjectCard({
   index: number;
   spotlight?: boolean;
 }) {
+  const reduceMotion = useReducedMotion();
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const rotateX = useSpring(tiltX, { stiffness: 160, damping: 18 });
+  const rotateY = useSpring(tiltY, { stiffness: 160, damping: 18 });
+
+  function onMove(e: MouseEvent<HTMLDivElement>) {
+    spotlightMove(e);
+    // Tilt only with a real mouse; touch screens and reduced motion keep the card flat.
+    if (reduceMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    tiltY.set(px * MAX_TILT * 2);
+    tiltX.set(-py * MAX_TILT * 2);
+  }
+
+  function onLeave() {
+    tiltX.set(0);
+    tiltY.set(0);
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, delay: (index % 2) * 0.08, ease: "easeOut" }}
-      onMouseMove={spotlightMove}
-      className={`group spotlight relative overflow-hidden rounded-2xl border bg-surface/60 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:bg-surface2/60 hover:shadow-lift sm:p-8 ${
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      style={{ rotateX, rotateY, transformPerspective: 1100 }}
+      className={`group spotlight relative overflow-hidden rounded-2xl border bg-surface/60 p-6 transition-[background-color,border-color,box-shadow] duration-300 will-change-transform hover:bg-surface2/60 hover:shadow-lift sm:p-8 ${
         spotlight ? "border-accent2/25" : "border-border hover:border-white/20"
       }`}
     >
@@ -114,7 +141,8 @@ export default function ProjectCard({
               src={project.image}
               alt={`${project.name} screenshot`}
               url={project.demo !== "#" ? project.demo : undefined}
-              className="transition-transform duration-500 group-hover:scale-[1.02]"
+              className="shadow-soft transition-shadow duration-500 group-hover:shadow-lift"
+              zoomOnHover
             />
           </Link>
         ) : (
