@@ -6,25 +6,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#08080A",
-        surface: "#0F0F12",
-        surface2: "#17171B",
-        border: "rgba(255,255,255,0.08)",
-        primary: "#F5F5F6",
-        secondary: "#96969E",
-        muted: "#6B6B72",
+        // Theme colors are RGB channels in CSS variables (see globals.css) so
+        // opacity modifiers like bg-surface/60 work in both light and dark mode.
+        bg: "rgb(var(--c-bg) / <alpha-value>)",
+        surface: "rgb(var(--c-surface) / <alpha-value>)",
+        surface2: "rgb(var(--c-surface2) / <alpha-value>)",
+        border: "rgb(var(--c-ink) / var(--border-alpha))",
+        primary: "rgb(var(--c-primary) / <alpha-value>)",
+        secondary: "rgb(var(--c-secondary) / <alpha-value>)",
+        muted: "rgb(var(--c-muted) / <alpha-value>)",
+        // "white" overlays (bg-white/5, border-white/20…) follow the theme's ink:
+        // white on dark, near-black on light.
+        white: "rgb(var(--c-ink) / <alpha-value>)",
         // Single vivid accent — the only hue in the UI.
         accent: {
           DEFAULT: "#6C5CE7",
           dim: "#5747C7",
-          bright: "#9C90FF",
+          bright: "rgb(var(--c-accent-bright) / <alpha-value>)",
         },
         // Repurposed as a neutral silver "sheen" — never a second hue, only ever
         // paired with `accent` for depth (gradients, glows, borders).
         accent2: {
-          DEFAULT: "#A6A6B3",
-          dim: "#75757F",
-          bright: "#E3E3E8",
+          DEFAULT: "rgb(var(--c-accent2) / <alpha-value>)",
+          dim: "rgb(var(--c-accent2-dim) / <alpha-value>)",
+          bright: "rgb(var(--c-accent2-bright) / <alpha-value>)",
         },
       },
       fontFamily: {
@@ -33,13 +38,13 @@ const config: Config = {
         mono: ["var(--font-jbmono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       boxShadow: {
-        soft: "0 8px 30px rgba(0,0,0,0.35)",
+        soft: "0 8px 30px rgb(0 0 0 / var(--shadow-alpha))",
         glow: "0 0 0 1px rgba(108,92,231,0.18), 0 8px 30px rgba(108,92,231,0.10)",
-        glow2: "0 0 0 1px rgba(255,255,255,0.10), 0 8px 30px rgba(255,255,255,0.05)",
-        lift: "0 24px 60px -20px rgba(0,0,0,0.6)",
+        glow2: "0 0 0 1px rgb(var(--c-ink) / 0.10), 0 8px 30px rgb(var(--c-ink) / 0.05)",
+        lift: "0 24px 60px -20px rgb(0 0 0 / calc(var(--shadow-alpha) * 1.7))",
       },
       backgroundImage: {
-        grid: "linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)",
+        grid: "linear-gradient(rgb(var(--c-ink) / 0.035) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--c-ink) / 0.035) 1px, transparent 1px)",
         "gradient-radial": "radial-gradient(circle, var(--tw-gradient-stops))",
       },
       keyframes: {

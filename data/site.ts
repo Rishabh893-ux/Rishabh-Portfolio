@@ -7,6 +7,8 @@ export const site = {
   linkedinUrl: "https://www.linkedin.com/in/rishabh-kasaudhan-0a960724a/",
   email: "rkasaudhan87@gmail.com",
   resumeUrl: "/resume.pdf",
+  // Profile photo under /public (e.g. "/profile.jpg"). Leave empty to show initials.
+  photo: "",
   location: "Lucknow, India",
   education: {
     degree: "B.Tech — Computer Science & Engineering",

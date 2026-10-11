@@ -8,6 +8,7 @@ import { certifications } from "@/data/certifications";
 import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
 import Terminal from "./Terminal";
+import HeroNetwork from "./HeroNetwork";
 import CountUp from "./CountUp";
 import Magnetic from "./Magnetic";
 import { spotlightMove } from "@/lib/utils";
@@ -26,11 +27,16 @@ const roles = site.role.split("•").map((r) => r.trim());
 function TypedRole() {
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
-  const [text, setText] = useState(reduce ? roles[0] : "");
+  // Always start empty: the server can't know the visitor's motion preference,
+  // so rendering the full role here would make hydration fail with reduced motion.
+  const [text, setText] = useState("");
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    if (reduce) return;
+    if (reduce) {
+      setText(roles[0]);
+      return;
+    }
     const full = roles[index];
     let delay = deleting ? 35 : 70;
     if (!deleting && text === full) delay = 1800;
@@ -68,7 +74,7 @@ const stats = [
 export default function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-24">
-      <div className="pointer-events-none absolute inset-0 bg-dot-grid [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,black,transparent)]" />
+      <HeroNetwork />
       <div className="glow-orb -left-24 top-10 h-72 w-72 bg-accent/20 animate-float" />
       <div className="glow-orb -right-16 top-40 h-80 w-80 bg-accent2/20 animate-float-slow" />
 

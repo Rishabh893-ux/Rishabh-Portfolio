@@ -1,6 +1,8 @@
 "use client";
 
-import { GraduationCap, Layers3, Sparkles, Zap, Workflow, Compass, Boxes, Lightbulb } from "lucide-react";
+import { GraduationCap, Layers3, Sparkles, Zap, Workflow, Compass, Boxes, Lightbulb, MapPin } from "lucide-react";
+import { site } from "@/data/site";
+import Avatar from "./Avatar";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import { spotlightMove } from "@/lib/utils";
@@ -78,10 +80,18 @@ export default function About() {
         <div className="grid grid-flow-row-dense grid-cols-2 gap-4 lg:grid-cols-4">
           {/* Bio tile */}
           <Tile span="col-span-2" delay={0}>
-            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 ring-1 ring-accent/20">
-              <Lightbulb size={18} className="text-accent" strokeWidth={1.75} />
+            <div className="mb-4 flex items-center gap-4">
+              <Avatar />
+              <div className="min-w-0">
+                <div className="font-display text-lg font-semibold text-primary">{site.name}</div>
+                <div className="mt-0.5 flex items-center gap-1.5 text-xs text-secondary">
+                  <MapPin size={12} className="text-accent" /> {site.location}
+                </div>
+              </div>
             </div>
-            <h3 className="font-display text-lg font-medium text-primary">Why I build this way</h3>
+            <h3 className="flex items-center gap-2 font-display text-lg font-medium text-primary">
+              <Lightbulb size={16} className="text-accent" strokeWidth={1.75} /> Why I build this way
+            </h3>
             <p className="mt-2 flex-1 text-sm leading-relaxed text-secondary">
               I enjoy turning early ideas into reliable end-to-end systems, and I care about the
               decisions behind the architecture, not just the final output. Every project is meant
