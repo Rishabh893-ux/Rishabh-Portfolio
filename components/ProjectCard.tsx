@@ -150,6 +150,7 @@ export default function ProjectCard({
               alt={`${project.name} screenshot`}
               url={project.demo !== "#" ? project.demo : undefined}
               className="shadow-soft transition-shadow duration-500 group-hover:shadow-lift"
+              imageClassName={project.imageAspect}
               zoomOnHover={!project.video}
               video={project.video}
               playing={previewing}
