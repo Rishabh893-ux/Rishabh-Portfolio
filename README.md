@@ -26,8 +26,6 @@ Built with Next.js 16, React 19, TypeScript, Tailwind CSS and Framer Motion.
 ## Highlights
 
 - **"Ask my AI" assistant** — a chat that answers visitors' questions about me from the portfolio's own data, with streamed replies from Gemini. The key stays on the server behind an origin check, a per-visitor rate limit and a timeout.
-- **3D hero** — a real-time three.js "neural globe" with data arcs and travelling pulses that reacts to the mouse and to scrolling. It falls back to a 2D canvas without WebGL or with reduced motion.
-- **Cinematic scrolling** — Lenis smooth scrolling, and on large screens the Work section pins while featured projects slide horizontally.
 - **Blog** — MDX posts in `content/blog/` with syntax highlighting for both themes, reading time and an "On this page" table of contents.
 - **Beige by default, dark on request** — a warm beige-and-gold theme for every visitor, with a violet dark theme one click away (the choice is remembered). Serif display type and a cursor glow.
 - **Experience-first layout** — the ImpulseAI internship leads the page, with an animated diagram of the Google Reviews pipeline (Google Business Profile API → n8n → OpenAI → reply + dashboard).
@@ -47,8 +45,7 @@ Built with Next.js 16, React 19, TypeScript, Tailwind CSS and Framer Motion.
 | --- | --- |
 | Framework | Next.js 16 (App Router, Turbopack), React 19, TypeScript |
 | Styling | Tailwind CSS 3.4, Space Grotesk + Inter + JetBrains Mono via `next/font` |
-| Animation | Framer Motion 11, Lenis (smooth scrolling) |
-| 3D | three.js (loaded on demand) |
+| Animation | Framer Motion 11 |
 | Blog | MDX via `next-mdx-remote`, `rehype-pretty-code` + Shiki, `rehype-slug` |
 | AI | Gemini API (streaming), through the `/api/ask` route |
 | Logos | `simple-icons` |

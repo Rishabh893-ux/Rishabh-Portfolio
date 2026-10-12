@@ -143,7 +143,6 @@ export default function AskAI() {
 
             <div
               ref={listRef}
-              data-lenis-prevent
               aria-live="polite"
               className="flex-1 space-y-3 overflow-y-auto overscroll-contain px-4 py-4"
             >
