@@ -100,7 +100,7 @@ export default function GitHubRepos() {
   }, []);
 
   return (
-    <section id="github" className="py-24 sm:py-32 border-t border-border">
+    <section id="github" className="section-rule section-sand py-24 sm:py-32">
       <div className="section-container">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading

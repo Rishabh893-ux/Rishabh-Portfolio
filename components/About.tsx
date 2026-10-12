@@ -68,7 +68,7 @@ export default function About() {
   const FeaturedIcon = focusAreas[0].icon;
 
   return (
-    <section id="about" className="py-24 sm:py-32 border-t border-border">
+    <section id="about" className="section-rule py-24 sm:py-32">
       <div className="section-container">
         <SectionHeading
           index="03"

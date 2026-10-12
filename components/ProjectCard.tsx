@@ -79,7 +79,7 @@ export default function ProjectCard({
         <div className="flex-1">
           <div className="mb-3 flex flex-wrap items-center gap-2">
             {spotlight && (
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-accent2/30 bg-accent2/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.1em] text-accent2-bright">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-terra/30 bg-terra/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.1em] text-terra">
                 <Sparkles size={11} /> Featured
               </span>
             )}
