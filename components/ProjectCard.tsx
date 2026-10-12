@@ -80,7 +80,7 @@ export default function ProjectCard({
                 <Sparkles size={11} /> Featured
               </span>
             )}
-            <span className="rounded-full border border-border px-2.5 py-0.5 text-[11px] font-medium text-secondary">
+            <span className="rounded-full border border-sage/35 bg-sage/[0.07] px-2.5 py-0.5 text-[11px] font-medium text-sage">
               {project.category}
             </span>
             {project.status && (
