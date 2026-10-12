@@ -90,8 +90,8 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs text-secondary"
           >
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sage opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-sage" />
             </span>
             Open to SDE &amp; Full Stack roles
           </motion.div>

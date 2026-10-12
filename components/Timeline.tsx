@@ -25,7 +25,7 @@ const events = [
 
 export default function Timeline() {
   return (
-    <section id="education" className="py-24 sm:py-32 border-t border-border">
+    <section id="education" className="section-rule py-24 sm:py-32">
       <div className="section-container">
         <SectionHeading index="05" label="Education" title="Education & Certifications" />
 

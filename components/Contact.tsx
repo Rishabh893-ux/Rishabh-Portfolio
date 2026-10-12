@@ -62,7 +62,7 @@ export default function Contact() {
   )}`;
 
   return (
-    <section id="contact" className="py-24 sm:py-32 border-t border-border">
+    <section id="contact" className="section-rule section-inverse py-24 sm:py-32">
       <div className="section-container">
         <Reveal className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-border bg-surface/50 p-6 sm:p-8 lg:p-10">
           <div className="glow-orb -left-16 -top-16 h-64 w-64 bg-accent/15" />
@@ -78,8 +78,8 @@ export default function Contact() {
               </h2>
               <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-bg/50 px-3 py-1.5 text-xs text-secondary">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sage opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-sage" />
                 </span>
                 Currently open to new opportunities
               </div>
