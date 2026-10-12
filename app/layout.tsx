@@ -78,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${jbmono.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable}`}
+      className={`light ${inter.variable} ${jbmono.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable}`}
       suppressHydrationWarning
     >
       <head>

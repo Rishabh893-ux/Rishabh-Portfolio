@@ -2,11 +2,14 @@ export type Theme = "light" | "dark";
 
 export const THEME_KEY = "theme";
 
+/** The beige & gold light theme is the site's signature look, so it is the default. */
+export const DEFAULT_THEME: Theme = "light";
+
 /**
- * Runs inline in <head> before first paint: use the saved choice, otherwise the
- * system preference, so the page never flashes the wrong theme.
+ * Runs inline in <head> before first paint: use the visitor's saved choice,
+ * otherwise the default theme, so the page never flashes the wrong theme.
  */
-export const themeInitScript = `(function(){try{var t=localStorage.getItem("${THEME_KEY}");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.classList.toggle("light",t==="light");}catch(e){}})();`;
+export const themeInitScript = `(function(){try{var t=localStorage.getItem("${THEME_KEY}");if(t!=="light"&&t!=="dark"){t="${DEFAULT_THEME}";}document.documentElement.classList.toggle("light",t==="light");}catch(e){}})();`;
 
 export function getTheme(): Theme {
   return document.documentElement.classList.contains("light") ? "light" : "dark";
