@@ -23,13 +23,10 @@ export default function ProjectCard({
   project,
   index,
   spotlight = false,
-  large = false,
 }: {
   project: Project;
   index: number;
   spotlight?: boolean;
-  /** Bigger padding and screenshot, for the horizontal rail. */
-  large?: boolean;
 }) {
   const reduceMotion = useReducedMotion();
   const [previewing, setPreviewing] = useState(false);
@@ -70,7 +67,7 @@ export default function ProjectCard({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       style={{ rotateX, rotateY, transformPerspective: 1100 }}
-      className={`group spotlight relative overflow-hidden rounded-2xl border bg-surface/60 p-6 transition-[background-color,border-color,box-shadow] duration-300 will-change-transform hover:bg-surface2/60 hover:shadow-lift ${large ? "sm:p-10" : "sm:p-8"} ${
+      className={`group spotlight relative overflow-hidden rounded-2xl border bg-surface/60 p-6 transition-[background-color,border-color,box-shadow] duration-300 will-change-transform hover:bg-surface2/60 hover:shadow-lift sm:p-8 ${
         spotlight ? "border-accent2/25" : "border-border hover:border-white/20"
       }`}
     >
@@ -147,7 +144,7 @@ export default function ProjectCard({
         </div>
 
         {project.image ? (
-          <Link href={`/project/${project.slug}`} tabIndex={-1} aria-hidden="true" className={`block w-full shrink-0 ${large ? "lg:w-[440px]" : "lg:w-80"}`}>
+          <Link href={`/project/${project.slug}`} tabIndex={-1} aria-hidden="true" className="block w-full shrink-0 lg:w-80">
             <Screenshot
               src={project.image}
               alt={`${project.name} screenshot`}
@@ -160,7 +157,7 @@ export default function ProjectCard({
             />
           </Link>
         ) : (
-        <div className={`w-full shrink-0 rounded-xl border border-border bg-bg/60 ${large ? "lg:w-80" : "lg:w-64"}`}>
+        <div className="w-full shrink-0 rounded-xl border border-border bg-bg/60 lg:w-64">
           <div className="flex items-center gap-1.5 border-b border-border px-3.5 py-2">
             <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
             <span className="h-1.5 w-1.5 rounded-full bg-white/20" />

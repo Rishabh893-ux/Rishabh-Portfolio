@@ -1,7 +1,7 @@
 "use client";
 
 import { featuredProjects, otherProjects } from "@/data/projects";
-import FeaturedRail from "./FeaturedRail";
+import ProjectCard from "./ProjectCard";
 import OtherProjects from "./OtherProjects";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
@@ -81,7 +81,11 @@ export default function ProjectGrid() {
           </div>
         </Reveal>
 
-        <FeaturedRail projects={featuredProjects} />
+        <div className="flex flex-col gap-5">
+          {featuredProjects.map((project, i) => (
+            <ProjectCard key={project.slug} project={project} index={i} spotlight={i === 0} />
+          ))}
+        </div>
 
         <OtherProjects projects={otherProjects} />
       </div>

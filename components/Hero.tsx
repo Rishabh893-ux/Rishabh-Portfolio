@@ -8,7 +8,7 @@ import { certifications } from "@/data/certifications";
 import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
 import Terminal from "./Terminal";
-import HeroBackground from "./HeroBackground";
+import HeroNetwork from "./HeroNetwork";
 import { REDUCED_MOTION, useMediaQuery } from "@/lib/useMediaQuery";
 import HeroPortrait from "./HeroPortrait";
 import Magnetic from "./Magnetic";
@@ -76,7 +76,7 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-24">
-      <HeroBackground />
+      <HeroNetwork />
       <div className="glow-orb -left-24 top-10 h-72 w-72 bg-accent/20 animate-float" />
       <div className="glow-orb -right-16 top-40 h-80 w-80 bg-accent2/20 animate-float-slow" />
 
