@@ -4,7 +4,7 @@ import { site } from "@/data/site";
 export default function Footer() {
   return (
     // Extra bottom padding keeps the last row clear of the floating "Ask my AI" button.
-    <footer className="relative border-t border-border pt-10 pb-28">
+    <footer className="section-inverse relative border-t border-border pt-10 pb-28">
       <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
       <div className="section-container grid gap-6 text-center sm:text-left lg:grid-cols-[1.2fr_0.8fr_0.4fr] lg:items-center">
         <div>

@@ -454,3 +454,24 @@ html.light .section-inverse {
 html.light .section-inverse .gradient-btn {
   box-shadow: none;
 }
+
+/* ---------- Beige theme polish ---------- */
+html.light ::selection {
+  background: rgb(var(--c-terra) / 0.22);
+}
+/* Hero: a warm wash with soft terracotta and sage light instead of flat ivory. */
+html.light #top {
+  background:
+    radial-gradient(55% 45% at 88% 18%, rgb(var(--c-terra) / 0.1), transparent 65%),
+    radial-gradient(45% 40% at 6% 85%, rgb(var(--c-sage) / 0.12), transparent 65%),
+    linear-gradient(180deg, rgb(var(--c-bg)) 0%, rgb(var(--tint-sand) / 0.55) 100%);
+}
+/* Cards: cream into sand, edged with a fine gold line. */
+html.light .glass-card {
+  background: linear-gradient(180deg, rgb(252 249 243 / 0.92), rgb(244 236 222 / 0.88));
+  border-color: rgb(var(--c-accent) / 0.16);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.7) inset, 0 18px 40px -24px rgb(74 54 28 / 0.35);
+}
+html.light .glass-card:hover {
+  border-color: rgb(var(--c-accent) / 0.32);
+}
