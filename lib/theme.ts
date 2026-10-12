@@ -2,8 +2,8 @@ export type Theme = "light" | "dark";
 
 export const THEME_KEY = "theme";
 
-/** The beige & gold light theme is the site's signature look, so it is the default. */
-export const DEFAULT_THEME: Theme = "light";
+/** The violet dark theme is the default; the beige & gold theme is one click away. */
+export const DEFAULT_THEME: Theme = "dark";
 
 /**
  * Runs inline in <head> before first paint: use the visitor's saved choice,
