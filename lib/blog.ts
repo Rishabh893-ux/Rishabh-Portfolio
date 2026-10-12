@@ -1,7 +1,7 @@
 import "server-only";
 import fs from "node:fs";
 import path from "node:path";
-import matter from "gray-matter";
+import { parse as parseYaml } from "yaml";
 import GithubSlugger from "github-slugger";
 
 const DIR = path.join(process.cwd(), "content", "blog");
@@ -22,10 +22,17 @@ function readingMinutes(source: string) {
   return Math.max(1, Math.round(words / 220));
 }
 
+/** Splits "---\n<yaml>\n---\n<body>" front matter from the post body. */
+function frontMatter(raw: string): { data: Record<string, unknown>; content: string } {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
+  if (!match) return { data: {}, content: raw };
+  return { data: (parseYaml(match[1]) as Record<string, unknown>) ?? {}, content: raw.slice(match[0].length) };
+}
+
 function parse(file: string) {
   const slug = file.replace(/\.mdx$/, "");
   const raw = fs.readFileSync(path.join(DIR, file), "utf8");
-  const { data, content } = matter(raw);
+  const { data, content } = frontMatter(raw);
   const meta: PostMeta = {
     slug,
     title: String(data.title),
