@@ -6,7 +6,6 @@ import { siteUrl } from "@/lib/siteUrl";
 import { Analytics } from "@vercel/analytics/next";
 import CommandPalette from "@/components/CommandPalette";
 import CursorGlow from "@/components/CursorGlow";
-import SmoothScroll from "@/components/SmoothScroll";
 import AskAI from "@/components/AskAI";
 import { themeInitScript } from "@/lib/theme";
 
@@ -92,7 +91,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         {children}
-        <SmoothScroll />
         <CursorGlow />
         <AskAI />
         <CommandPalette />
