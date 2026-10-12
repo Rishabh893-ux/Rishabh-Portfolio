@@ -29,7 +29,7 @@ Built with Next.js 16, React 19, TypeScript, Tailwind CSS and Framer Motion.
 - **3D hero** — a real-time three.js "neural globe" with data arcs and travelling pulses that reacts to the mouse and to scrolling. It falls back to a 2D canvas without WebGL or with reduced motion.
 - **Cinematic scrolling** — Lenis smooth scrolling, and on large screens the Work section pins while featured projects slide horizontally.
 - **Blog** — MDX posts in `content/blog/` with syntax highlighting for both themes, reading time and an "On this page" table of contents.
-- **Light and dark themes** — a violet dark theme and a warm beige-and-gold light theme, with serif display type and a cursor glow.
+- **Beige by default, dark on request** — a warm beige-and-gold theme for every visitor, with a violet dark theme one click away (the choice is remembered). Serif display type and a cursor glow.
 - **Experience-first layout** — the ImpulseAI internship leads the page, with an animated diagram of the Google Reviews pipeline (Google Business Profile API → n8n → OpenAI → reply + dashboard).
 - **Project case studies** — every project has its own page (`/project/[slug]`) with problem, solution, system flow, tech decisions and challenges. Live projects show real screenshots.
 - **Interactive terminal** in the hero — try `help`, `experience`, `projects`, `github`, `resume`.
