@@ -107,7 +107,7 @@ function Pipeline() {
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 sm:py-32 border-t border-border">
+    <section id="experience" className="section-rule py-24 sm:py-32">
       <div className="section-container">
         <SectionHeading
           index="01"
@@ -128,8 +128,8 @@ export default function Experience() {
                     {featured.company}
                   </h3>
                   {featured.current && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-accent-bright">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-terra/30 bg-terra/10 px-2.5 py-1 text-[11px] font-medium text-terra">
+                      <span className="h-1.5 w-1.5 rounded-full bg-terra animate-pulse" />
                       Current
                     </span>
                   )}
@@ -156,7 +156,7 @@ export default function Experience() {
                   {featured.highlights.map((h) => (
                     <motion.li key={h} variants={listItem} className="flex gap-3 text-sm leading-relaxed text-primary/85">
                       <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/15">
-                        <Check size={12} className="text-accent" strokeWidth={2.5} />
+                        <Check size={12} className="text-sage" strokeWidth={2.5} />
                       </span>
                       {h}
                     </motion.li>
