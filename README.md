@@ -27,7 +27,7 @@ Built with Next.js 16, React 19, TypeScript, Tailwind CSS and Framer Motion.
 
 - **"Ask my AI" assistant** — a chat that answers visitors' questions about me from the portfolio's own data, with streamed replies from Gemini. The key stays on the server behind an origin check, a per-visitor rate limit and a timeout.
 - **Blog** — MDX posts in `content/blog/` with syntax highlighting for both themes, reading time and an "On this page" table of contents.
-- **Beige by default, dark on request** — a warm beige-and-gold theme for every visitor, with a violet dark theme one click away (the choice is remembered). Serif display type and a cursor glow.
+- **Dark by default, beige on request** — a violet dark theme for every visitor, with a warm beige-and-gold theme one click away (the choice is remembered). Serif display type and a cursor glow.
 - **Experience-first layout** — the ImpulseAI internship leads the page, with an animated diagram of the Google Reviews pipeline (Google Business Profile API → n8n → OpenAI → reply + dashboard).
 - **Project case studies** — every project has its own page (`/project/[slug]`) with problem, solution, system flow, tech decisions and challenges. Live projects show real screenshots.
 - **Interactive terminal** in the hero — try `help`, `experience`, `projects`, `github`, `resume`.
