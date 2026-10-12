@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Command } from "lucide-react";
 import { site } from "@/data/site";
@@ -18,6 +19,10 @@ const links = [
 ];
 
 export default function Navbar() {
+  // Section links point at the home page when shown on other pages (projects, blog).
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  const sectionHref = (href: string) => (onHome ? href : `/${href}`);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
@@ -67,7 +72,7 @@ export default function Navbar() {
                 : "bg-transparent py-3"
             )}
           >
-            <a href="#top" className="font-mono text-sm font-medium tracking-tight text-primary focus-ring rounded">
+            <a href={sectionHref("#top")} className="font-mono text-sm font-medium tracking-tight text-primary focus-ring rounded">
               rishabh<span className="text-accent">.</span>dev
             </a>
 
@@ -75,7 +80,7 @@ export default function Navbar() {
               {links.map((l) => (
                 <a
                   key={l.href}
-                  href={l.href}
+                  href={sectionHref(l.href)}
                   className={cn(
                     "relative px-3 py-2 text-sm rounded-lg transition-colors focus-ring",
                     active === l.href
@@ -92,6 +97,15 @@ export default function Navbar() {
                   )}
                 </a>
               ))}
+              <a
+                href="/blog"
+                className={cn(
+                  "relative px-3 py-2 text-sm rounded-lg transition-colors focus-ring",
+                  pathname?.startsWith("/blog") ? "text-primary" : "text-secondary hover:text-primary"
+                )}
+              >
+                Blog
+              </a>
             </nav>
 
             <div className="hidden md:flex items-center gap-2">
@@ -151,7 +165,7 @@ export default function Navbar() {
               {links.map((l) => (
                 <motion.a
                   key={l.href}
-                  href={l.href}
+                  href={sectionHref(l.href)}
                   onClick={() => setOpen(false)}
                   variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }}
                   className="rounded-xl px-4 py-4 text-lg text-primary border-b border-border focus-ring"
@@ -159,6 +173,14 @@ export default function Navbar() {
                   {l.label}
                 </motion.a>
               ))}
+              <motion.a
+                href="/blog"
+                onClick={() => setOpen(false)}
+                variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }}
+                className="rounded-xl px-4 py-4 text-lg text-primary border-b border-border focus-ring"
+              >
+                Blog
+              </motion.a>
               <a
                 href={site.resumeUrl}
                 onClick={() => setOpen(false)}
