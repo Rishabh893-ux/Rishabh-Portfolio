@@ -1,20 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 import { getTheme, toggleTheme, type Theme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
-export default function ThemeToggle({ className }: { className?: string }) {
-  // null until mounted: the server can't know the visitor's theme.
-  const [theme, setThemeState] = useState<Theme | null>(null);
+function subscribeTheme(onChange: () => void) {
+  window.addEventListener("themechange", onChange);
+  return () => window.removeEventListener("themechange", onChange);
+}
 
-  useEffect(() => {
-    setThemeState(getTheme());
-    const onChange = () => setThemeState(getTheme());
-    window.addEventListener("themechange", onChange);
-    return () => window.removeEventListener("themechange", onChange);
-  }, []);
+export default function ThemeToggle({ className }: { className?: string }) {
+  // null on the server, which can't know the visitor's theme.
+  const theme = useSyncExternalStore<Theme | null>(subscribeTheme, getTheme, () => null);
 
   const next = theme === "light" ? "dark" : "light";
   return (
