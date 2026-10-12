@@ -25,6 +25,9 @@ const config: Config = {
           dim: "rgb(var(--c-accent-dim) / <alpha-value>)",
           bright: "rgb(var(--c-accent-bright) / <alpha-value>)",
         },
+        // Secondary accents of the editorial palette.
+        terra: "rgb(var(--c-terra) / <alpha-value>)",
+        sage: "rgb(var(--c-sage) / <alpha-value>)",
         // Repurposed as a neutral silver "sheen" — never a second hue, only ever
         // paired with `accent` for depth (gradients, glows, borders).
         accent2: {

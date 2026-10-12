@@ -20,9 +20,18 @@ export default function SectionHeading({
   const reduce = useReducedMotion();
   const words = title.split(" ");
   return (
-    <Reveal className={`mb-12 max-w-2xl ${align === "center" ? "mx-auto text-center" : ""}`}>
+    <Reveal className={`relative mb-12 max-w-2xl ${align === "center" ? "mx-auto text-center" : ""}`}>
+      {/* Oversized faded section number, magazine style. */}
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none absolute -top-12 select-none font-serif text-[8.5rem] italic leading-none text-accent/[0.09] sm:-top-16 sm:text-[11rem] ${
+          align === "center" ? "left-1/2 -translate-x-1/2" : "-left-3 sm:-left-6"
+        }`}
+      >
+        {index}
+      </span>
       <div
-        className={`inline-flex items-center gap-2 font-mono text-xs text-accent ${
+        className={`relative inline-flex items-center gap-2 font-mono text-xs text-accent ${
           align === "center" ? "justify-center" : ""
         }`}
       >
@@ -37,7 +46,7 @@ export default function SectionHeading({
       </div>
       <h2
         aria-label={title}
-        className="mt-3 font-serif text-4xl font-normal leading-[1.05] tracking-tight text-primary sm:text-5xl"
+        className="relative mt-3 font-serif text-4xl font-normal leading-[1.05] tracking-tight text-primary sm:text-5xl"
       >
         {/* Each word rises out of its own clipping box, one after another. */}
         {words.map((word, i) => (
@@ -57,7 +66,7 @@ export default function SectionHeading({
           </span>
         ))}
       </h2>
-      {description && <p className="mt-3 text-secondary leading-relaxed">{description}</p>}
+      {description && <p className="relative mt-3 text-secondary leading-relaxed">{description}</p>}
     </Reveal>
   );
 }

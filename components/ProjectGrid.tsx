@@ -39,7 +39,7 @@ const stackHighlights = [
 
 export default function ProjectGrid() {
   return (
-    <section id="work" className="py-24 sm:py-32 border-t border-border">
+    <section id="work" className="section-rule section-sand py-24 sm:py-32">
       <div className="section-container">
         <SectionHeading
           index="02"

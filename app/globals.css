@@ -17,6 +17,14 @@
   --c-accent: 108 92 231;
   --c-accent-dim: 87 71 199;
   --c-accent-bright: 156 144 255;
+  /* Secondary accents: terracotta (highlights, badges) and sage (status, checks). */
+  --c-terra: 224 138 98;
+  --c-sage: 168 190 148;
+  /* Section tints, layered over the page background. */
+  --tint-sand: 255 255 255;
+  --tint-sand-alpha: 0.018;
+  --tint-sage: 168 190 148;
+  --tint-sage-alpha: 0.03;
   --c-accent2: 166 166 179;
   --c-accent2-dim: 117 117 127;
   --c-accent2-bright: 227 227 232;
@@ -52,13 +60,19 @@ html.light {
   --c-surface2: 241 234 221;
   --c-primary: 38 30 22;
   --c-secondary: 105 91 75;
-  --c-muted: 123 109 91;
+  --c-muted: 115 101 84;
   --c-ink: 74 54 28;
   --border-alpha: 0.14;
   --shadow-alpha: 0.1;
   --c-accent: 132 98 31;
   --c-accent-dim: 100 72 20;
   --c-accent-bright: 122 90 31;
+  --c-terra: 154 74 40;
+  --c-sage: 85 99 63;
+  --tint-sand: 234 223 203;
+  --tint-sand-alpha: 0.6;
+  --tint-sage: 218 224 204;
+  --tint-sage-alpha: 0.5;
   --c-accent2: 150 132 104;
   --c-accent2-dim: 196 180 152;
   --c-accent2-bright: 112 94 66;
@@ -386,4 +400,57 @@ html.light .skill-tile {
 }
 html.light .prose-blog pre span[style*="--shiki-light"] {
   color: var(--shiki-light);
+}
+
+/* ---------- Editorial palette: section rhythm ---------- */
+/* A gold hairline between sections instead of a flat border. */
+.section-rule {
+  position: relative;
+}
+.section-rule::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(72rem, 92%);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgb(var(--c-accent) / 0.45), transparent);
+}
+.section-sand {
+  background: rgb(var(--tint-sand) / var(--tint-sand-alpha));
+}
+.section-sage {
+  background: rgb(var(--tint-sage) / var(--tint-sage-alpha));
+}
+
+/* In the beige theme, Contact becomes a rich espresso panel. It redefines the
+   theme variables, so everything inside (cards, inputs, buttons) adapts. */
+html.light .section-inverse {
+  --c-bg: 38 30 22;
+  --c-bg-end: 30 23 17;
+  --c-surface: 52 42 32;
+  --c-surface2: 64 52 40;
+  --c-primary: 246 241 231;
+  --c-secondary: 214 202 182;
+  --c-muted: 179 165 143;
+  --c-ink: 246 236 220;
+  --border-alpha: 0.12;
+  --c-accent: 214 172 92;
+  --c-accent-dim: 176 138 64;
+  --c-accent-bright: 226 192 120;
+  --c-accent2: 190 175 150;
+  --c-accent2-bright: 230 220 200;
+  --c-sage: 168 190 148;
+  --c-terra: 224 138 98;
+  --glass: 52 42 32;
+  --btn-from: 226 192 120;
+  --btn-to: 176 138 64;
+  --name-from: 226 192 120;
+  --name-to: 176 138 64;
+  background: rgb(var(--c-bg));
+  color: rgb(var(--c-primary));
+}
+html.light .section-inverse .gradient-btn {
+  box-shadow: none;
 }

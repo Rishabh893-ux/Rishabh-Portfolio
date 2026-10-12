@@ -50,7 +50,7 @@ export default function Skills() {
   const [active, setActive] = useState<Skill | null>(null);
 
   return (
-    <section id="skills" className="py-24 sm:py-32 border-t border-border">
+    <section id="skills" className="section-rule section-sage py-24 sm:py-32">
       <div className="section-container">
         <SectionHeading
           index="04"
