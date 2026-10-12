@@ -9,6 +9,7 @@ import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
 import Terminal from "./Terminal";
 import HeroBackground from "./HeroBackground";
+import { REDUCED_MOTION, useMediaQuery } from "@/lib/useMediaQuery";
 import HeroPortrait from "./HeroPortrait";
 import Magnetic from "./Magnetic";
 
@@ -24,7 +25,7 @@ const fadeUp = {
 const roles = site.role.split("•").map((r) => r.trim());
 
 function TypedRole() {
-  const reduce = useReducedMotion();
+  const reduce = useMediaQuery(REDUCED_MOTION);
   const [index, setIndex] = useState(0);
   // Always start empty: the server can't know the visitor's motion preference,
   // so rendering the full role here would make hydration fail with reduced motion.
@@ -32,10 +33,7 @@ function TypedRole() {
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    if (reduce) {
-      setText(roles[0]);
-      return;
-    }
+    if (reduce) return;
     const full = roles[index];
     let delay = deleting ? 35 : 70;
     if (!deleting && text === full) delay = 1800;
@@ -58,7 +56,7 @@ function TypedRole() {
       <span className="text-secondary" aria-hidden="true">
         &gt;{" "}
       </span>
-      <span aria-hidden="true">{text}</span>
+      <span aria-hidden="true">{reduce ? roles[0] : text}</span>
       <span className="ml-0.5 inline-block h-[1.1em] w-[0.55em] translate-y-[0.15em] animate-blink bg-accent" aria-hidden="true" />
     </span>
   );

@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import type { Project } from "@/data/projects";
 import ProjectCard from "./ProjectCard";
+import { REDUCED_MOTION, useMediaQuery } from "@/lib/useMediaQuery";
 
 // useLayoutEffect warns during server rendering; fall back to useEffect there.
 const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
@@ -14,20 +15,9 @@ const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayout
  * for reduced motion it stays a plain vertical list.
  */
 export default function FeaturedRail({ projects }: { projects: Project[] }) {
-  const [horizontal, setHorizontal] = useState(false);
-
-  useEffect(() => {
-    const wide = window.matchMedia("(min-width: 1024px)");
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setHorizontal(wide.matches && !reduce.matches);
-    update();
-    wide.addEventListener("change", update);
-    reduce.addEventListener("change", update);
-    return () => {
-      wide.removeEventListener("change", update);
-      reduce.removeEventListener("change", update);
-    };
-  }, []);
+  const wide = useMediaQuery("(min-width: 1024px)");
+  const reduce = useMediaQuery(REDUCED_MOTION);
+  const horizontal = wide && !reduce;
 
   if (!horizontal) {
     return (

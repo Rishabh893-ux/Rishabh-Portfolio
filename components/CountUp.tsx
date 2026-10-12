@@ -13,10 +13,7 @@ export default function CountUp({ value, duration = 1200 }: { value: string; dur
   const suffix = match ? match[2] : "";
 
   useEffect(() => {
-    if (!inView || target === null) {
-      if (target === null) setDisplay(value);
-      return;
-    }
+    if (!inView || target === null) return;
     let raf: number;
     const start = performance.now();
     const tick = (now: number) => {
@@ -32,8 +29,8 @@ export default function CountUp({ value, duration = 1200 }: { value: string; dur
 
   return (
     <span ref={ref}>
-      {display}
-      {suffix}
+      {target === null ? value : display}
+      {target === null ? "" : suffix}
     </span>
   );
 }
