@@ -1,5 +1,13 @@
 import type { MouseEvent } from "react";
 
+/** Scrolls to a section, through Lenis smooth scrolling when it is active. */
+export function scrollToId(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (window.__lenis) window.__lenis.scrollTo(el, { offset: -80 });
+  else el.scrollIntoView({ behavior: "smooth" });
+}
+
 export function cn(...classes: (string | false | null | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
