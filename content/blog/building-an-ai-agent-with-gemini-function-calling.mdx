@@ -1,0 +1,102 @@
+---
+title: "Building an AI mentor that acts, not just chats"
+description: "How I turned AI Navigator's chatbot into an agent with Gemini function calling — five tools, a client-side agent loop, and the four bugs that taught me the most."
+date: "2026-10-12"
+tags: ["AI agents", "Gemini", "Next.js", "TypeScript"]
+---
+
+Most "AI mentor" features are a chat box: you ask, it answers, and then **you** go and do the work. In [AI Navigator](https://ai-navigator-five-nu.vercel.app) I wanted the mentor to do things for the learner. If you say *"quiz me on RAG"*, it should open the quiz. If you say *"make me a 4-week plan"*, the plan should appear on your dashboard.
+
+That's the difference between a chatbot and an **agent**: an agent can take actions. Here's how I built it with Gemini function calling, and what broke along the way.
+
+## The idea: the model asks, the app acts
+
+With function calling, you describe a set of tools to the model. When it decides a tool would help, it doesn't run anything itself. It replies with a structured request instead, such as "call `start_quiz` with `skill_id: "rag"`". Your code runs the tool and sends the result back, and the model continues.
+
+In AI Navigator all of the learner's progress lives in the browser, so the browser is where the tools run. The mentor gets five of them:
+
+- `mark_skill_complete`: the learner says they already know a skill
+- `start_quiz`: open the quiz for a skill
+- `open_page`: navigate the app, optionally highlighting a skill or topic
+- `save_study_plan`: write a week-by-week plan to the dashboard
+- `set_level`: switch between beginner, intermediate and advanced
+
+A declaration is just a name, a description and a JSON schema for the arguments:
+
+```ts
+{
+  name: "mark_skill_complete",
+  description:
+    "Mark a skill as completed because the learner says they already know it or have finished it. " +
+    "Only call this when the learner clearly asks; never to reward them for a quiz they haven't taken.",
+  parameters: {
+    type: "object",
+    properties: { skill_id: { type: "string", enum: SKILL_IDS } },
+    required: ["skill_id"],
+  },
+}
+```
+
+Two details in that declaration matter more than they look. The **`enum`** limits `skill_id` to real skills, so the model can't invent one. And the **description is a guardrail**: the second sentence exists because, without it, the model would happily "complete" skills as a reward.
+
+## The agent loop
+
+One user message can need several steps. "Plan my next month and take me to it" means saving a plan, *then* opening the dashboard. So the mentor runs a small loop:
+
+```ts
+for (let round = 0; ; round++) {
+  const { parts } = await askGemini(contents);
+  contents.push({ role: "model", parts });
+
+  const calls = parts.filter((p) => "functionCall" in p);
+  if (!calls.length) break; // plain answer: we're done
+
+  const responses = calls.map(({ functionCall }) => {
+    const outcome = runTool(functionCall.name, functionCall.args ?? {});
+    return {
+      functionResponse: {
+        name: functionCall.name,
+        id: functionCall.id,
+        response: { ok: outcome.ok, result: outcome.message },
+      },
+    };
+  });
+  contents.push({ role: "user", parts: responses });
+
+  if (round + 1 >= MAX_TOOL_ROUNDS) break; // 4 rounds, so it can't loop forever
+}
+```
+
+The loop runs in the browser because that's where the data is. The **API key never does**: requests go through a small Next.js route that validates every message part, checks the request comes from the site, rate-limits each visitor and times out slow calls.
+
+## Four bugs that taught me the most
+
+### 1. The "thought signature" you must send back
+
+My first multi-step conversations failed on the *second* request with a 400 error. Gemini attaches a `thoughtSignature` to its function-call parts, and it expects to receive it back **unchanged** in the conversation history. My server route was "cleaning" message parts and quietly dropping it.
+
+The fix was to keep the signature on model parts, untouched, with a length cap so the route still rejects garbage. Lesson: when an API hands you an opaque token, assume you have to return it.
+
+### 2. Parallel tool calls and stale state
+
+Gemini can ask for several tools in one round, for example marking three skills as known at once. Each tool read the learner's progress from React state, but state from the *same render* is a snapshot. The second call didn't see the first call's change, and the third one overwrote both.
+
+I moved the latest progress into a ref that every tool reads and writes through a `getProgress()` helper, so calls in the same round build on each other instead of racing.
+
+### 3. Trust, but verify (and allow Undo)
+
+The model's arguments are input like any other, so **every tool call is validated** before it runs: unknown skill ids, empty plans and impossible weeks are rejected, and the error goes back to Gemini so it can correct itself. Every action that changes data also shows up in the chat as a card with an **Undo** button. An agent that can change your data should make that easy to see and easy to reverse.
+
+### 4. Not every error deserves a retry
+
+I added automatic retries for "model busy" errors, which helped. But a used-up free quota looks similar and *never* succeeds on retry, so the mentor kept hammering the API. Now quota errors are detected and shown as a clear message instead of retried.
+
+## What I'd do next
+
+- **Stream the replies.** Today the mentor waits for each full response. Streaming text (while still handling tool calls) would make it feel faster.
+- **Evaluate tool choice.** I tested the logic with 31 unit tests, but the *model's* decisions, such as when to call which tool, deserve their own small evaluation set.
+- **Sync across devices.** Progress lives in the browser by design (no accounts), which also means it doesn't follow you to your phone.
+
+The biggest takeaway: the model was the easy part. The work was in the boundaries around it: clear tool descriptions, strict validation, state that can't race, and an Undo button.
+
+You can try the mentor yourself in the [live demo](https://ai-navigator-five-nu.vercel.app) or read the [source on GitHub](https://github.com/Rishabh893-ux/AI-Navigator-).

@@ -13,9 +13,12 @@ import {
   FileDown,
   Mail,
   Sun,
+  Sparkles,
+  BookOpen,
 } from "lucide-react";
 import { site } from "@/data/site";
 import { toggleTheme } from "@/lib/theme";
+import { scrollToId } from "@/lib/utils";
 
 type Cmd = {
   id: string;
@@ -36,7 +39,7 @@ export default function CommandPalette() {
     if (window.location.pathname !== "/") {
       router.push(`/#${id}`);
     } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      scrollToId(id);
     }
   };
 
@@ -50,6 +53,17 @@ export default function CommandPalette() {
       { id: "open-linkedin", label: "Open LinkedIn", icon: <Linkedin size={15} />, action: () => window.open(site.linkedinUrl, "_blank"), group: "Links" },
       { id: "download-resume", label: "Download Resume", icon: <FileDown size={15} />, action: () => window.open(site.resumeUrl, "_blank"), group: "Links" },
       { id: "contact", label: "Contact Rishabh", icon: <Mail size={15} />, action: () => goTo("contact"), group: "Links" },
+      {
+        id: "ask-ai",
+        label: "Ask my AI about Rishabh",
+        icon: <Sparkles size={15} />,
+        action: () => {
+          setOpen(false);
+          window.dispatchEvent(new CustomEvent("open-ask-ai"));
+        },
+        group: "Links",
+      },
+      { id: "blog", label: "Read the Blog", icon: <BookOpen size={15} />, action: () => { setOpen(false); router.push("/blog"); }, group: "Navigate" },
       {
         id: "toggle-theme",
         label: "Toggle Light / Dark Theme",
