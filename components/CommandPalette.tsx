@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -29,9 +29,16 @@ type Cmd = {
 };
 
 export default function CommandPalette() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpenState] = useState(false);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
+
+  // Opening or closing always starts from an empty search with the first item selected.
+  const setOpen = useCallback((next: boolean | ((open: boolean) => boolean)) => {
+    setOpenState(next);
+    setQuery("");
+    setActiveIndex(0);
+  }, []);
   const router = useRouter();
 
   const goTo = (id: string) => {
@@ -98,15 +105,7 @@ export default function CommandPalette() {
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("open-command-palette", onOpenEvent);
     };
-  }, []);
-
-  useEffect(() => {
-    setActiveIndex(0);
-  }, [query, open]);
-
-  useEffect(() => {
-    if (!open) setQuery("");
-  }, [open]);
+  }, [setOpen]);
 
   function onKeyDown(e: React.KeyboardEvent) {
     if (e.key === "ArrowDown") {
@@ -147,7 +146,10 @@ export default function CommandPalette() {
               <input
                 autoFocus
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setActiveIndex(0);
+                }}
                 onKeyDown={onKeyDown}
                 placeholder="Type a command…"
                 className="w-full bg-transparent text-sm text-primary outline-none placeholder:text-secondary/60"

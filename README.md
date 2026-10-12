@@ -5,9 +5,9 @@
 **Full Stack Developer · Next.js · Node.js · MongoDB · AI Automation**
 
 Personal portfolio of a Full Stack Intern at ImpulseAI and final-year B.Tech CSE student.
-Built with Next.js 14, TypeScript, Tailwind CSS and Framer Motion.
+Built with Next.js 16, React 19, TypeScript, Tailwind CSS and Framer Motion.
 
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-0055FF?logo=framer&logoColor=white)](https://www.framer.com/motion/)
@@ -45,7 +45,7 @@ Built with Next.js 14, TypeScript, Tailwind CSS and Framer Motion.
 
 | Area | Tools |
 | --- | --- |
-| Framework | Next.js 14 (App Router), React 18, TypeScript |
+| Framework | Next.js 16 (App Router, Turbopack), React 19, TypeScript |
 | Styling | Tailwind CSS 3.4, Space Grotesk + Inter + JetBrains Mono via `next/font` |
 | Animation | Framer Motion 11, Lenis (smooth scrolling) |
 | 3D | three.js (loaded on demand) |
@@ -59,7 +59,7 @@ Built with Next.js 14, TypeScript, Tailwind CSS and Framer Motion.
 
 ## Getting started
 
-Requires **Node.js 18.17+**.
+Requires **Node.js 20.9+**.
 
 ```bash
 git clone https://github.com/Rishabh893-ux/Rishabh-Portfolio.git
