@@ -24,7 +24,7 @@ export default function OtherProjects({ projects }: { projects: Project[] }) {
               className="gradient-border spotlight group flex h-full flex-col rounded-xl border border-border bg-surface/50 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-surface2/50 focus-ring"
             >
               <div className="flex items-start justify-between gap-2">
-                <span className="rounded-full border border-border px-2.5 py-0.5 text-[10px] font-medium text-secondary">
+                <span className="rounded-full border border-sage/35 bg-sage/[0.07] px-2.5 py-0.5 text-[10px] font-medium text-sage">
                   {project.category}
                 </span>
                 <ArrowUpRight
