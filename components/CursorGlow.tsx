@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { FINE_POINTER, REDUCED_MOTION, useMediaQuery } from "@/lib/useMediaQuery";
 
 const INTERACTIVE = "a, button, [role='button'], input, textarea, select, label, summary";
 
@@ -11,26 +12,15 @@ const INTERACTIVE = "a, button, [role='button'], input, textarea, select, label,
  * desktop-only (a fine pointer with hover) and off for reduced motion.
  */
 export default function CursorGlow() {
-  const [enabled, setEnabled] = useState(false);
+  const finePointer = useMediaQuery(FINE_POINTER);
+  const reduceMotion = useMediaQuery(REDUCED_MOTION);
+  const enabled = finePointer && !reduceMotion;
   const [hovering, setHovering] = useState(false);
   const [visible, setVisible] = useState(false);
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
   const sx = useSpring(x, { stiffness: 500, damping: 40, mass: 0.4 });
   const sy = useSpring(y, { stiffness: 500, damping: 40, mass: 0.4 });
-
-  useEffect(() => {
-    const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setEnabled(fine.matches && !reduce.matches);
-    update();
-    fine.addEventListener("change", update);
-    reduce.addEventListener("change", update);
-    return () => {
-      fine.removeEventListener("change", update);
-      reduce.removeEventListener("change", update);
-    };
-  }, []);
 
   useEffect(() => {
     if (!enabled) return;
