@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/data/site";
+import { scrollToId as scrollToIdSmooth } from "@/lib/utils";
 
 type Line = { prompt?: boolean; text: string };
 
@@ -29,7 +30,7 @@ const HELP_TEXT = [
 ];
 
 function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  scrollToIdSmooth(id);
 }
 
 export default function Terminal() {

@@ -292,3 +292,98 @@ html.light .skill-tile {
 .skill-tile:focus-visible .skill-logo {
   color: var(--glow);
 }
+
+/* ---------- Blog article typography ---------- */
+.prose-blog {
+  color: rgb(var(--c-secondary));
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+.prose-blog > * + * {
+  margin-top: 1.25em;
+}
+.prose-blog h2 {
+  margin-top: 2.4em;
+  scroll-margin-top: 6rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 2rem;
+  line-height: 1.15;
+  color: rgb(var(--c-primary));
+}
+.prose-blog h3 {
+  margin-top: 1.8em;
+  scroll-margin-top: 6rem;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: rgb(var(--c-primary));
+}
+.prose-blog strong {
+  color: rgb(var(--c-primary));
+  font-weight: 600;
+}
+.prose-blog a {
+  color: rgb(var(--c-accent-bright));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--c-accent) / 0.4);
+  text-underline-offset: 3px;
+}
+.prose-blog a:hover {
+  text-decoration-color: currentColor;
+}
+.prose-blog ul,
+.prose-blog ol {
+  padding-left: 1.4em;
+}
+.prose-blog ul {
+  list-style: disc;
+}
+.prose-blog ol {
+  list-style: decimal;
+}
+.prose-blog li + li {
+  margin-top: 0.4em;
+}
+.prose-blog li::marker {
+  color: rgb(var(--c-accent));
+}
+.prose-blog blockquote {
+  border-left: 2px solid rgb(var(--c-accent));
+  padding: 0.2em 0 0.2em 1.1em;
+  color: rgb(var(--c-primary) / 0.9);
+  font-style: italic;
+}
+.prose-blog hr {
+  border-color: rgb(var(--c-ink) / var(--border-alpha));
+  margin: 2.5em 0;
+}
+.prose-blog :not(pre) > code {
+  border-radius: 0.375rem;
+  background: rgb(var(--c-ink) / 0.07);
+  padding: 0.15em 0.4em;
+  font-family: var(--font-jbmono), ui-monospace, monospace;
+  font-size: 0.85em;
+  color: rgb(var(--c-primary));
+}
+.prose-blog figure[data-rehype-pretty-code-figure] {
+  margin-top: 1.5em;
+}
+.prose-blog pre {
+  overflow-x: auto;
+  border: 1px solid rgb(var(--c-ink) / var(--border-alpha));
+  border-radius: 0.875rem;
+  background: rgb(var(--c-surface));
+  padding: 1rem 1.15rem;
+  font-family: var(--font-jbmono), ui-monospace, monospace;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+.prose-blog pre code {
+  display: grid;
+}
+/* rehype-pretty-code writes both themes' colors as variables; pick one per theme. */
+.prose-blog pre span[style*="--shiki-dark"] {
+  color: var(--shiki-dark);
+}
+html.light .prose-blog pre span[style*="--shiki-light"] {
+  color: var(--shiki-light);
+}
