@@ -17,7 +17,7 @@ Built with Next.js 16, React 19, TypeScript, Tailwind CSS and Framer Motion.
 
 <br />
 
-<img src="docs/preview.jpg" alt="Portfolio hero section: name, typed role, tagline, interactive terminal and stats" width="100%" />
+<img src="docs/preview.jpg" alt="Portfolio hero section: name, typed role, tagline, profile photo and stats" width="100%" />
 
 </div>
 
@@ -39,12 +39,28 @@ Built with Next.js 16, React 19, TypeScript, Tailwind CSS and Framer Motion.
 - **Accessible and motion-aware** — keyboard navigable, visible focus states, and animations respect `prefers-reduced-motion`.
 - **Responsive** — tested down to 390px phone width.
 
+## Projects
+
+Every project has a full case study on the site. Live demos run on Vercel.
+
+| Project | What it is | Stack | Links |
+| --- | --- | --- | --- |
+| **AI Navigator** | AI learning platform with a skill tree, quizzes and an agent mentor that acts inside the app | Next.js 16, Gemini (function calling) | [Live](https://ai-navigator-five-nu.vercel.app) · [Code](https://github.com/Rishabh893-ux/AI-Navigator-) |
+| **CareerOS AI** | Career-readiness platform that tells you exactly what to fix — and shows its working | Next.js 16, Express, MongoDB Atlas, Groq | [Live](https://career-os-ai-ten.vercel.app) · [Code](https://github.com/Rishabh893-ux/CareerOS-AI) |
+| **EdgePilot AI** | Edge intelligence for heavy machinery: predictive maintenance and computer-vision safety | FastAPI, YOLOv8n, MQTT, Gemini | [Live](https://edge-pilot-ai.vercel.app) · [Code](https://github.com/Rishabh893-ux/EdgePilot_AI) |
+| **Vendly** | Multi-vendor e-commerce with per-vendor payouts, inventory and analytics | Next.js, Prisma, MongoDB, Stripe Connect | [Live](https://vendly-dun.vercel.app) · [Code](https://github.com/Rishabh893-ux/Bazaario-ECommerce-Platform) |
+| **AI ATS Resume** | Resume builder and ATS score checker that tailors your resume to any job | Next.js, MongoDB, NextAuth, Gemini | [Live](https://ai-ats-resume-platfoorm.vercel.app) · [Code](https://github.com/Rishabh893-ux/AI-ATS-RESUME-PLATFOORM) |
+| **Waypoint** | Conversational learner profiling that generates an adaptive learning roadmap | Next.js 16, TypeScript, Gemini | [Live](https://waypointlearningpath.vercel.app) · [Code](https://github.com/Rishabh893-ux/WaypointLearningPath) |
+| **ReviveAI** | Detects abandoned carts and failed payments, then runs AI-drafted recovery workflows | React, Express, Supabase, n8n, Gemini, Razorpay | [Live](https://ai-revenue-recovery-system.vercel.app) · [Code](https://github.com/Rishabh893-ux/AI-Revenue-Recovery-System) |
+| **Rishabh Studio** | AI video SaaS that turns a text prompt into a Short or long-form video | React, FastAPI, 8-agent Gemini pipeline, Whisper | [Code](https://github.com/Rishabh893-ux/rishabh-studio) |
+| **Library Management API** | .NET 8 REST API with loans, late fines, a reservation queue and reports | ASP.NET Core, EF Core, SQL Server, JWT | [Code](https://github.com/Rishabh893-ux/Library-management-system) |
+
 ## Tech stack
 
 | Area | Tools |
 | --- | --- |
 | Framework | Next.js 16 (App Router, Turbopack), React 19, TypeScript |
-| Styling | Tailwind CSS 3.4, Space Grotesk + Inter + JetBrains Mono via `next/font` |
+| Styling | Tailwind CSS 3.4; Instrument Serif, Space Grotesk, Inter and JetBrains Mono via `next/font` |
 | Animation | Framer Motion 11 |
 | Blog | MDX via `next-mdx-remote`, `rehype-pretty-code` + Shiki, `rehype-slug` |
 | AI | Gemini API (streaming), through the `/api/ask` route |
@@ -97,7 +113,7 @@ All content lives in `data/`, so updating the site rarely means touching compone
 | `data/skills.ts` | Skill categories and which projects/roles use each skill |
 | `data/certifications.ts` | Certifications (add `link` for a verify button) |
 | `public/resume.pdf` | The file behind every "Resume" button |
-| `public/projects/` | Project screenshots referenced by `image` in `projects.ts` |
+| `public/projects/` | Project screenshots (`image`) and hover-preview videos (`previews/`, `video`) referenced in `projects.ts` |
 | `content/blog/*.mdx` | Blog posts. Front matter: `title`, `description`, `date` (YYYY-MM-DD) and `tags`. `## ` headings become the table of contents. |
 
 A GitHub or demo link set to `"#"` is hidden automatically, so unfinished links never show as broken buttons.
@@ -106,16 +122,19 @@ A GitHub or demo link set to `"#"` is hidden automatically, so unfinished links 
 
 ```
 app/
-  layout.tsx              Root layout: fonts, metadata, analytics
+  layout.tsx              Root layout: fonts, theme script, metadata, analytics
   page.tsx                Home page — composes the sections
   project/[slug]/         Statically generated case-study pages
+  blog/, blog/[slug]/     Blog index and MDX post pages
+  api/ask/route.ts        "Ask my AI" endpoint (streams Gemini replies)
   opengraph-image.tsx     Generated social preview image
   sitemap.ts, robots.ts   SEO routes
-  globals.css             Base styles and utility classes
+  globals.css             Theme variables (dark + beige), base styles, utilities
 components/               Sections (Hero, Experience, ProjectGrid, Skills…) and shared UI
+content/blog/             Blog posts (.mdx)
 data/                     All site content (see above)
-lib/                      Helpers: site URL, chart colors, utilities
-public/                   Resume, favicon, project screenshots
+lib/                      Helpers: AI context, blog loader, theme, site URL, tech icons
+public/                   Resume, favicon, project screenshots and hover previews
 docs/                     README assets
 ```
 

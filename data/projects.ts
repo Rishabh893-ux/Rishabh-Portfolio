@@ -458,9 +458,10 @@ export const projects: Project[] = [
       "Finish reconciling the frontend to the newer monorepo layout (split services/utils, dedicated dashboard navbar, real product imagery)",
       "Add a docker-compose-based one-command local setup",
     ],
-    github: "#",
-    demo: "#",
-    featured: false,
+    github: "https://github.com/Rishabh893-ux/AI-Revenue-Recovery-System",
+    demo: "https://ai-revenue-recovery-system.vercel.app",
+    image: "/projects/ai-revenue-recovery.jpg",
+    featured: true,
   },
   {
     slug: "ops-agent-platform",
